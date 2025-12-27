@@ -34,15 +34,20 @@ class ProductSectionWidget extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 12),
-        GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 12, mainAxisSpacing: 12, mainAxisExtent: 350),
-          itemCount: products.length,
-          itemBuilder: (context, index) {
-            return ProductCardWidget(product: products[index]);
-          },
+        SizedBox(
+          height: 350,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            itemCount: products.length,
+            itemBuilder: (context, index) {
+              return Container(
+                width: MediaQuery.of(context).size.width * 0.4,
+                margin: EdgeInsets.only(right: index < products.length - 1 ? 12 : 0),
+                child: ProductCardWidget(product: products[index]),
+              );
+            },
+          ),
         ),
       ],
     );
