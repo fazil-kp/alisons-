@@ -6,7 +6,12 @@ extension StringExtensions on String {
     if (startsWith('http://') || startsWith('https://')) {
       return this;
     }
-    return '${AppConstants.imageBaseUrl}$this';
+    // If the path already starts with /, use it as is
+    // Otherwise, prepend /storage/ for Laravel storage files
+    // Remove any leading slashes from the filename to avoid double slashes
+    final cleanPath = trim().replaceFirst(RegExp(r'^/+'), '');
+    final imagePath = cleanPath.startsWith('/') ? cleanPath : '/storage/$cleanPath';
+    return '${AppConstants.imageBaseUrl}$imagePath';
   }
 }
 

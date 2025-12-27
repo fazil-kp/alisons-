@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/utils/extensions.dart';
+import '../../../../core/constants/app_constants.dart';
 
 class CategoryItemWidget extends StatelessWidget {
   final CategoryModel category;
@@ -30,9 +31,9 @@ class CategoryItemWidget extends StatelessWidget {
               border: Border.all(color: Colors.grey.shade300, width: 2),
             ),
             child: ClipOval(
-              child: category.imageUrl != null
+              child: category.imageUrl != null && category.imageUrl!.isNotEmpty
                   ? CachedNetworkImage(
-                      imageUrl: category.imageUrl!.imageUrl,
+                      imageUrl: '${AppConstants.imageBaseUrl}/uploads/categories/${category.imageUrl}',
                       fit: BoxFit.cover,
                       placeholder: (context, url) => Container(
                         color: Colors.grey.shade200,

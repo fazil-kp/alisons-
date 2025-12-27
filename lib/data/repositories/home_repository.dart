@@ -23,15 +23,31 @@ class HomeRepository {
 
       if (response.statusCode == 200) {
         final data = response.data;
-        
+
         // Handle different response structures
         if (data is Map<String, dynamic>) {
           if (data.containsKey('data')) {
-            return HomeResponseModel.fromJson(data['data']);
+            final responseData = data['data'] as Map<String, dynamic>;
+
+            // Handle categories with wrapper structure
+            if (responseData.containsKey('categories') && responseData['categories'] is List) {
+              final categories = responseData['categories'] as List;
+              final processedCategories = categories.map((item) {
+                if (item is Map<String, dynamic> && item.containsKey('category')) {
+                  return item['category'] as Map<String, dynamic>;
+                }
+                return item as Map<String, dynamic>;
+              }).toList();
+
+              // Update the response data with processed categories
+              responseData['categories'] = processedCategories;
+            }
+
+            return HomeResponseModel.fromJson(responseData);
           }
           return HomeResponseModel.fromJson(data);
         }
-        
+
         return const HomeResponseModel();
       }
 

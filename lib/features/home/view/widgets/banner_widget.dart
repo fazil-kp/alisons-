@@ -19,24 +19,46 @@ class BannerWidget extends StatelessWidget {
         child: Stack(
           children: [
             // Banner Image
-            if (banner.imageUrl != null)
+            if (banner.imageUrl != null && banner.imageUrl!.isNotEmpty)
               CachedNetworkImage(
                 imageUrl: banner.imageUrl!.imageUrl,
                 width: double.infinity,
                 height: 200,
                 fit: BoxFit.cover,
+                fadeInDuration: const Duration(milliseconds: 300),
                 placeholder: (context, url) => Container(
                   width: double.infinity,
                   height: 200,
                   color: Colors.grey.shade200,
                   child: const Center(child: CircularProgressIndicator()),
                 ),
-                errorWidget: (context, url, error) => Container(
-                  width: double.infinity,
-                  height: 200,
-                  color: AppTheme.orange,
-                  child: const Icon(Icons.image_not_supported, color: AppTheme.white),
-                ),
+                errorWidget: (context, url, error) {
+                  debugPrint('Banner image error: $url - $error');
+                  return Container(
+                    width: double.infinity,
+                    height: 200,
+                    color: AppTheme.orange,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.image_not_supported, color: AppTheme.white, size: 48),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Failed to load image',
+                          style: const TextStyle(color: AppTheme.white, fontSize: 12),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              )
+            else
+              Container(
+                width: double.infinity,
+                height: 200,
+                color: Colors.grey.shade200,
+                child: const Icon(Icons.image, color: Colors.grey),
               ),
             // Gradient overlay for better text visibility
             Container(
