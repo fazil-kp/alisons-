@@ -3,14 +3,14 @@ class AuthService {
   factory AuthService() => _instance;
   AuthService._internal();
 
-  int? _userId;
+  String? _userId;
   String? _token;
 
-  int? get userId => _userId;
+  String? get userId => _userId;
   String? get token => _token;
   bool get isAuthenticated => _userId != null && _token != null;
 
-  void setCredentials(int userId, String token) {
+  void setCredentials(String userId, String token) {
     _userId = userId;
     _token = token;
   }

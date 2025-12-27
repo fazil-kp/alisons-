@@ -9,11 +9,11 @@ part of 'login_response_model.dart';
 _$LoginResponseModelImpl _$$LoginResponseModelImplFromJson(
   Map<String, dynamic> json,
 ) => _$LoginResponseModelImpl(
-  id: (json['id'] as num?)?.toInt(),
+  id: json['id'] as String?,
   token: json['token'] as String?,
-  user: json['user'] as Map<String, dynamic>?,
+  customerdata: json['customerdata'] as Map<String, dynamic>?,
   message: json['message'] as String?,
-  success: json['success'] as bool? ?? true,
+  success: json['success'] as bool? ?? false,
 );
 
 Map<String, dynamic> _$$LoginResponseModelImplToJson(
@@ -21,7 +21,7 @@ Map<String, dynamic> _$$LoginResponseModelImplToJson(
 ) => <String, dynamic>{
   'id': instance.id,
   'token': instance.token,
-  'user': instance.user,
+  'customerdata': instance.customerdata,
   'message': instance.message,
   'success': instance.success,
 };

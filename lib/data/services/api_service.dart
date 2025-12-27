@@ -11,9 +11,13 @@ class ApiService {
         baseUrl: AppConstants.baseUrl,
         connectTimeout: const Duration(milliseconds: AppConstants.connectTimeout),
         receiveTimeout: const Duration(milliseconds: AppConstants.receiveTimeout),
+        sendTimeout: const Duration(milliseconds: AppConstants.connectTimeout),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
+        },
+        validateStatus: (status) {
+          return status != null && status < 500;
         },
       ),
     );

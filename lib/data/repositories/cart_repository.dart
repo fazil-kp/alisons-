@@ -8,7 +8,7 @@ class CartRepository {
   CartRepository(this._apiService);
 
   Future<List<CartItemModel>> getCart({
-    required int id,
+    required String id,
     required String token,
     String locale = 'en',
   }) async {
@@ -62,7 +62,7 @@ class CartRepository {
   }
 
   Future<bool> addToCart({
-    required int id,
+    required String id,
     required String token,
     required String slug,
     required int quantity,

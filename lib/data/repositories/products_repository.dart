@@ -9,7 +9,7 @@ class ProductsRepository {
   ProductsRepository(this._apiService);
 
   Future<ProductsResponseModel> getProducts({
-    required int id,
+    required String id,
     required String token,
     String locale = 'en',
     String? by, // category, brand, store, search
@@ -63,7 +63,7 @@ class ProductsRepository {
 
   Future<ProductModel> getProductDetails({
     required String slug,
-    required int id,
+    required String id,
     required String token,
     String locale = 'en',
     String? store,

@@ -18,9 +18,9 @@ class AppConstants {
   static const String defaultEmail = 'mobile@alisonsgroup.com';
   static const String defaultPassword = '12345678';
   
-  // Timeouts
-  static const int connectTimeout = 30000;
-  static const int receiveTimeout = 30000;
+  // Timeouts (in milliseconds)
+  static const int connectTimeout = 60000; // 60 seconds
+  static const int receiveTimeout = 60000; // 60 seconds
   
   // Pagination
   static const int defaultPageSize = 20;

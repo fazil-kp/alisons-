@@ -38,7 +38,13 @@ class HomeViewModel extends ChangeNotifier {
       );
       _errorMessage = null;
     } catch (e) {
-      _errorMessage = 'Failed to load home data. Please try again.';
+      String errorMsg = 'Failed to load home data. Please try again.';
+      if (e.toString().contains('timeout')) {
+        errorMsg = 'Connection timeout. Please check your internet connection and try again.';
+      } else if (e.toString().contains('SocketException') || e.toString().contains('network')) {
+        errorMsg = 'Network error. Please check your internet connection.';
+      }
+      _errorMessage = errorMsg;
       _homeData = null;
     } finally {
       _isLoading = false;

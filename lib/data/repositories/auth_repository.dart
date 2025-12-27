@@ -21,7 +21,29 @@ class AuthRepository {
       if (response.statusCode == 200) {
         final data = response.data;
         if (data is Map<String, dynamic>) {
-          return LoginResponseModel.fromJson(data);
+          // Extract id and token from customerdata
+          String? id;
+          String? token;
+          Map<String, dynamic>? customerdata;
+          
+          if (data['customerdata'] is Map<String, dynamic>) {
+            customerdata = data['customerdata'] as Map<String, dynamic>;
+            id = customerdata['id']?.toString();
+            token = customerdata['token']?.toString();
+          }
+          
+          // Convert success from int to bool (1 = true, 0 = false)
+          final successValue = data['success'];
+          final bool success = successValue == 1 || successValue == true;
+          
+          // Create the model with extracted values
+          return LoginResponseModel(
+            id: id,
+            token: token,
+            customerdata: customerdata,
+            message: data['message']?.toString(),
+            success: success,
+          );
         }
         throw Exception('Invalid response format');
       }

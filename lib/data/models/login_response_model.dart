@@ -6,11 +6,11 @@ part 'login_response_model.g.dart';
 @freezed
 class LoginResponseModel with _$LoginResponseModel {
   const factory LoginResponseModel({
-    @JsonKey(name: 'id') int? id,
-    @JsonKey(name: 'token') String? token,
-    @JsonKey(name: 'user') Map<String, dynamic>? user,
+    String? id,
+    String? token,
+    @JsonKey(name: 'customerdata') Map<String, dynamic>? customerdata,
     String? message,
-    @Default(true) bool success,
+    @Default(false) bool success,
   }) = _LoginResponseModel;
 
   factory LoginResponseModel.fromJson(Map<String, dynamic> json) =>

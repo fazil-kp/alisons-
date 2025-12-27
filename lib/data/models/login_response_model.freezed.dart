@@ -21,12 +21,10 @@ LoginResponseModel _$LoginResponseModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$LoginResponseModel {
-  @JsonKey(name: 'id')
-  int? get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'token')
+  String? get id => throw _privateConstructorUsedError;
   String? get token => throw _privateConstructorUsedError;
-  @JsonKey(name: 'user')
-  Map<String, dynamic>? get user => throw _privateConstructorUsedError;
+  @JsonKey(name: 'customerdata')
+  Map<String, dynamic>? get customerdata => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
   bool get success => throw _privateConstructorUsedError;
 
@@ -48,9 +46,9 @@ abstract class $LoginResponseModelCopyWith<$Res> {
   ) = _$LoginResponseModelCopyWithImpl<$Res, LoginResponseModel>;
   @useResult
   $Res call({
-    @JsonKey(name: 'id') int? id,
-    @JsonKey(name: 'token') String? token,
-    @JsonKey(name: 'user') Map<String, dynamic>? user,
+    String? id,
+    String? token,
+    @JsonKey(name: 'customerdata') Map<String, dynamic>? customerdata,
     String? message,
     bool success,
   });
@@ -73,7 +71,7 @@ class _$LoginResponseModelCopyWithImpl<$Res, $Val extends LoginResponseModel>
   $Res call({
     Object? id = freezed,
     Object? token = freezed,
-    Object? user = freezed,
+    Object? customerdata = freezed,
     Object? message = freezed,
     Object? success = null,
   }) {
@@ -82,14 +80,14 @@ class _$LoginResponseModelCopyWithImpl<$Res, $Val extends LoginResponseModel>
             id: freezed == id
                 ? _value.id
                 : id // ignore: cast_nullable_to_non_nullable
-                      as int?,
+                      as String?,
             token: freezed == token
                 ? _value.token
                 : token // ignore: cast_nullable_to_non_nullable
                       as String?,
-            user: freezed == user
-                ? _value.user
-                : user // ignore: cast_nullable_to_non_nullable
+            customerdata: freezed == customerdata
+                ? _value.customerdata
+                : customerdata // ignore: cast_nullable_to_non_nullable
                       as Map<String, dynamic>?,
             message: freezed == message
                 ? _value.message
@@ -115,9 +113,9 @@ abstract class _$$LoginResponseModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    @JsonKey(name: 'id') int? id,
-    @JsonKey(name: 'token') String? token,
-    @JsonKey(name: 'user') Map<String, dynamic>? user,
+    String? id,
+    String? token,
+    @JsonKey(name: 'customerdata') Map<String, dynamic>? customerdata,
     String? message,
     bool success,
   });
@@ -139,7 +137,7 @@ class __$$LoginResponseModelImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? token = freezed,
-    Object? user = freezed,
+    Object? customerdata = freezed,
     Object? message = freezed,
     Object? success = null,
   }) {
@@ -148,14 +146,14 @@ class __$$LoginResponseModelImplCopyWithImpl<$Res>
         id: freezed == id
             ? _value.id
             : id // ignore: cast_nullable_to_non_nullable
-                  as int?,
+                  as String?,
         token: freezed == token
             ? _value.token
             : token // ignore: cast_nullable_to_non_nullable
                   as String?,
-        user: freezed == user
-            ? _value._user
-            : user // ignore: cast_nullable_to_non_nullable
+        customerdata: freezed == customerdata
+            ? _value._customerdata
+            : customerdata // ignore: cast_nullable_to_non_nullable
                   as Map<String, dynamic>?,
         message: freezed == message
             ? _value.message
@@ -174,29 +172,27 @@ class __$$LoginResponseModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$LoginResponseModelImpl implements _LoginResponseModel {
   const _$LoginResponseModelImpl({
-    @JsonKey(name: 'id') this.id,
-    @JsonKey(name: 'token') this.token,
-    @JsonKey(name: 'user') final Map<String, dynamic>? user,
+    this.id,
+    this.token,
+    @JsonKey(name: 'customerdata') final Map<String, dynamic>? customerdata,
     this.message,
-    this.success = true,
-  }) : _user = user;
+    this.success = false,
+  }) : _customerdata = customerdata;
 
   factory _$LoginResponseModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$LoginResponseModelImplFromJson(json);
 
   @override
-  @JsonKey(name: 'id')
-  final int? id;
+  final String? id;
   @override
-  @JsonKey(name: 'token')
   final String? token;
-  final Map<String, dynamic>? _user;
+  final Map<String, dynamic>? _customerdata;
   @override
-  @JsonKey(name: 'user')
-  Map<String, dynamic>? get user {
-    final value = _user;
+  @JsonKey(name: 'customerdata')
+  Map<String, dynamic>? get customerdata {
+    final value = _customerdata;
     if (value == null) return null;
-    if (_user is EqualUnmodifiableMapView) return _user;
+    if (_customerdata is EqualUnmodifiableMapView) return _customerdata;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(value);
   }
@@ -209,7 +205,7 @@ class _$LoginResponseModelImpl implements _LoginResponseModel {
 
   @override
   String toString() {
-    return 'LoginResponseModel(id: $id, token: $token, user: $user, message: $message, success: $success)';
+    return 'LoginResponseModel(id: $id, token: $token, customerdata: $customerdata, message: $message, success: $success)';
   }
 
   @override
@@ -219,7 +215,10 @@ class _$LoginResponseModelImpl implements _LoginResponseModel {
             other is _$LoginResponseModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.token, token) || other.token == token) &&
-            const DeepCollectionEquality().equals(other._user, _user) &&
+            const DeepCollectionEquality().equals(
+              other._customerdata,
+              _customerdata,
+            ) &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.success, success) || other.success == success));
   }
@@ -230,7 +229,7 @@ class _$LoginResponseModelImpl implements _LoginResponseModel {
     runtimeType,
     id,
     token,
-    const DeepCollectionEquality().hash(_user),
+    const DeepCollectionEquality().hash(_customerdata),
     message,
     success,
   );
@@ -254,9 +253,9 @@ class _$LoginResponseModelImpl implements _LoginResponseModel {
 
 abstract class _LoginResponseModel implements LoginResponseModel {
   const factory _LoginResponseModel({
-    @JsonKey(name: 'id') final int? id,
-    @JsonKey(name: 'token') final String? token,
-    @JsonKey(name: 'user') final Map<String, dynamic>? user,
+    final String? id,
+    final String? token,
+    @JsonKey(name: 'customerdata') final Map<String, dynamic>? customerdata,
     final String? message,
     final bool success,
   }) = _$LoginResponseModelImpl;
@@ -265,14 +264,12 @@ abstract class _LoginResponseModel implements LoginResponseModel {
       _$LoginResponseModelImpl.fromJson;
 
   @override
-  @JsonKey(name: 'id')
-  int? get id;
+  String? get id;
   @override
-  @JsonKey(name: 'token')
   String? get token;
   @override
-  @JsonKey(name: 'user')
-  Map<String, dynamic>? get user;
+  @JsonKey(name: 'customerdata')
+  Map<String, dynamic>? get customerdata;
   @override
   String? get message;
   @override

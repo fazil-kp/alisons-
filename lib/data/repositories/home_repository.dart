@@ -8,12 +8,12 @@ class HomeRepository {
   HomeRepository(this._apiService);
 
   Future<HomeResponseModel> getHomeData({
-    required int id,
+    required String id,
     required String token,
     String locale = 'en',
   }) async {
     try {
-      final response = await _apiService.get(
+      final response = await _apiService.post(
         '/home/$locale',
         queryParameters: {
           'id': id,
