@@ -19,6 +19,9 @@ class ProductCardWidget extends StatelessWidget {
     final isInCart = cartViewModel.isInCart(product.id);
     final quantity = isInCart ? cartViewModel.getQuantity(product.id) : 0;
 
+    // Debug logging to identify product ID issues
+    print('ProductCardWidget - Product ID: ${product.id}, Name: ${product.name}, isInCart: $isInCart, quantity: $quantity');
+
     return GestureDetector(
       onTap: () {
         if (product.slug != null) {

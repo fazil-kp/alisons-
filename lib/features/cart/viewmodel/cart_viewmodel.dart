@@ -18,14 +18,20 @@ class CartViewModel extends ChangeNotifier {
   bool get isEmpty => _items.isEmpty;
 
   void addToCart(ProductModel product, {int quantity = 1}) {
+    print('CartViewModel.addToCart - Product ID: ${product.id}, Name: ${product.name}, Quantity to add: $quantity');
     final existingIndex = _items.indexWhere((item) => item.product.id == product.id);
+    print('CartViewModel.addToCart - Existing index: $existingIndex, Current items count: ${_items.length}');
 
     if (existingIndex >= 0) {
-      _items[existingIndex] = CartItemModel(product: product, quantity: _items[existingIndex].quantity + quantity);
+      final newQuantity = _items[existingIndex].quantity + quantity;
+      _items[existingIndex] = CartItemModel(product: product, quantity: newQuantity);
+      print('CartViewModel.addToCart - Updated existing item, new quantity: $newQuantity');
     } else {
       _items.add(CartItemModel(product: product, quantity: quantity));
+      print('CartViewModel.addToCart - Added new item with quantity: $quantity');
     }
 
+    print('CartViewModel.addToCart - Total items after add: ${_items.length}');
     notifyListeners();
   }
 
@@ -48,16 +54,24 @@ class CartViewModel extends ChangeNotifier {
   }
 
   void incrementQuantity(int productId) {
+    print('CartViewModel.incrementQuantity - Product ID: $productId');
     final index = _items.indexWhere((item) => item.product.id == productId);
+    print('CartViewModel.incrementQuantity - Found at index: $index');
     if (index >= 0) {
       updateQuantity(productId, _items[index].quantity + 1);
+    } else {
+      print('CartViewModel.incrementQuantity - Product not found in cart!');
     }
   }
 
   void decrementQuantity(int productId) {
+    print('CartViewModel.decrementQuantity - Product ID: $productId');
     final index = _items.indexWhere((item) => item.product.id == productId);
+    print('CartViewModel.decrementQuantity - Found at index: $index');
     if (index >= 0) {
       updateQuantity(productId, _items[index].quantity - 1);
+    } else {
+      print('CartViewModel.decrementQuantity - Product not found in cart!');
     }
   }
 
