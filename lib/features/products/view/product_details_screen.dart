@@ -10,11 +10,13 @@ import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/extensions.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  final int productId;
+  final String slug;
+  final String? store;
 
   const ProductDetailsScreen({
     super.key,
-    required this.productId,
+    required this.slug,
+    this.store,
   });
 
   @override
@@ -35,7 +37,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     return ChangeNotifierProvider(
       create: (_) => ProductDetailsViewModel(
         ProductsRepository(ApiService()),
-        widget.productId,
+        widget.slug,
+        store: widget.store,
       ),
       child: Scaffold(
         backgroundColor: AppTheme.lightGrey,

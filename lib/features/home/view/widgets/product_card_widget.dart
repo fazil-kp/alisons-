@@ -11,11 +11,7 @@ class ProductCardWidget extends StatelessWidget {
   final ProductModel product;
   final double? width;
 
-  const ProductCardWidget({
-    super.key,
-    required this.product,
-    this.width,
-  });
+  const ProductCardWidget({super.key, required this.product, this.width});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +21,9 @@ class ProductCardWidget extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        context.push('/product-details?id=${product.id}');
+        if (product.slug != null) {
+          context.push('/product-details?slug=${product.slug}');
+        }
       },
       child: Container(
         width: width ?? 160,
@@ -42,9 +40,7 @@ class ProductCardWidget extends StatelessWidget {
             Stack(
               children: [
                 ClipRRect(
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(12),
-                  ),
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
                   child: CachedNetworkImage(
                     imageUrl: product.imageUrl?.imageUrl ?? '',
                     width: double.infinity,
@@ -54,40 +50,22 @@ class ProductCardWidget extends StatelessWidget {
                       width: double.infinity,
                       height: 120,
                       color: Colors.grey.shade200,
-                      child: const Center(
-                        child: CircularProgressIndicator(),
-                      ),
+                      child: const Center(child: CircularProgressIndicator()),
                     ),
-                    errorWidget: (context, url, error) => Container(
-                      width: double.infinity,
-                      height: 120,
-                      color: Colors.grey.shade200,
-                      child: const Icon(Icons.image_not_supported),
-                    ),
+                    errorWidget: (context, url, error) => Container(width: double.infinity, height: 120, color: Colors.grey.shade200, child: const Icon(Icons.image_not_supported)),
                   ),
                 ),
                 // Discount Badge
-                if (product.discountPercentage != null &&
-                    product.discountPercentage! > 0)
+                if (product.discountPercentage != null && product.discountPercentage! > 0)
                   Positioned(
                     top: 8,
                     left: 8,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 6,
-                        vertical: 4,
-                      ),
-                      decoration: BoxDecoration(
-                        color: AppTheme.primaryColor,
-                        borderRadius: BorderRadius.circular(4),
-                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+                      decoration: BoxDecoration(color: AppTheme.primaryColor, borderRadius: BorderRadius.circular(4)),
                       child: Text(
                         '${product.discountPercentage!.toInt()}% off',
-                        style: const TextStyle(
-                          color: AppTheme.white,
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: const TextStyle(color: AppTheme.white, fontSize: 10, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
@@ -96,11 +74,7 @@ class ProductCardWidget extends StatelessWidget {
                   top: 8,
                   right: 8,
                   child: IconButton(
-                    icon: const Icon(
-                      Icons.favorite_border,
-                      color: AppTheme.white,
-                      size: 20,
-                    ),
+                    icon: const Icon(Icons.favorite_border, color: AppTheme.white, size: 20),
                     onPressed: () {
                       // TODO: Implement wishlist
                     },
@@ -108,7 +82,7 @@ class ProductCardWidget extends StatelessWidget {
                 ),
               ],
             ),
-            
+
             // Product Info
             Padding(
               padding: const EdgeInsets.all(8),
@@ -119,84 +93,57 @@ class ProductCardWidget extends StatelessWidget {
                   if (product.category != null)
                     Text(
                       product.category!,
-                      style: context.textTheme.bodySmall?.copyWith(
-                        color: Colors.grey.shade600,
-                      ),
+                      style: context.textTheme.bodySmall?.copyWith(color: Colors.grey.shade600),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                   const SizedBox(height: 4),
-                  
+
                   // Product Name
                   Text(
                     product.name,
-                    style: context.textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 8),
-                  
+
                   // Price
                   Row(
                     children: [
                       Text(
                         '₹${product.currentPrice.toStringAsFixed(2)}',
-                        style: context.textTheme.titleSmall?.copyWith(
-                          color: AppTheme.primaryColor,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: context.textTheme.titleSmall?.copyWith(color: AppTheme.primaryColor, fontWeight: FontWeight.bold),
                       ),
-                      if (product.originalPrice != null &&
-                          product.originalPrice! > product.currentPrice) ...[
+                      if (product.originalPrice != null && product.originalPrice! > product.currentPrice) ...[
                         const SizedBox(width: 4),
                         Text(
                           '₹${product.originalPrice!.toStringAsFixed(2)}',
-                          style: context.textTheme.bodySmall?.copyWith(
-                            decoration: TextDecoration.lineThrough,
-                            color: Colors.grey,
-                          ),
+                          style: context.textTheme.bodySmall?.copyWith(decoration: TextDecoration.lineThrough, color: Colors.grey),
                         ),
                       ],
                     ],
                   ),
                   const SizedBox(height: 8),
-                  
+
                   // Add to Cart / Quantity Control
                   if (isInCart && quantity > 0)
                     Container(
-                      decoration: BoxDecoration(
-                        color: AppTheme.primaryColor,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
+                      decoration: BoxDecoration(color: AppTheme.primaryColor, borderRadius: BorderRadius.circular(8)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           IconButton(
-                            icon: const Icon(
-                              Icons.remove,
-                              color: AppTheme.white,
-                              size: 18,
-                            ),
-                            onPressed: () =>
-                                cartViewModel.decrementQuantity(product.id),
+                            icon: const Icon(Icons.remove, color: AppTheme.white, size: 18),
+                            onPressed: () => cartViewModel.decrementQuantity(product.id),
                           ),
                           Text(
                             '$quantity',
-                            style: const TextStyle(
-                              color: AppTheme.white,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: const TextStyle(color: AppTheme.white, fontWeight: FontWeight.bold),
                           ),
                           IconButton(
-                            icon: const Icon(
-                              Icons.add,
-                              color: AppTheme.white,
-                              size: 18,
-                            ),
-                            onPressed: () =>
-                                cartViewModel.incrementQuantity(product.id),
+                            icon: const Icon(Icons.add, color: AppTheme.white, size: 18),
+                            onPressed: () => cartViewModel.incrementQuantity(product.id),
                           ),
                         ],
                       ),
@@ -210,9 +157,7 @@ class ProductCardWidget extends StatelessWidget {
                         },
                         icon: const Icon(Icons.shopping_cart, size: 16),
                         label: const Text('Add'),
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                        ),
+                        style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 8)),
                       ),
                     ),
                 ],
@@ -224,4 +169,3 @@ class ProductCardWidget extends StatelessWidget {
     );
   }
 }
-

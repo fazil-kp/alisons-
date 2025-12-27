@@ -23,8 +23,9 @@ class AppRouter {
         path: '/product-details',
         name: 'product-details',
         builder: (context, state) {
-          final productId = int.tryParse(state.uri.queryParameters['id'] ?? '0') ?? 0;
-          return ProductDetailsScreen(productId: productId);
+          final slug = state.uri.queryParameters['slug'] ?? '';
+          final store = state.uri.queryParameters['store'];
+          return ProductDetailsScreen(slug: slug, store: store);
         },
       ),
       GoRoute(path: '/cart', name: 'cart', builder: (context, state) => const CartScreen()),

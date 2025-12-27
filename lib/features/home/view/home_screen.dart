@@ -210,47 +210,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(height: 24),
                   ],
                   
-                  // Featured Products
-                  ProductSectionWidget(
-                    title: 'Featured Products',
-                    products: homeData.featuredProducts,
-                  ),
-                  
-                  const SizedBox(height: 24),
-                  
-                  // Daily Best Selling
-                  ProductSectionWidget(
-                    title: 'Daily Best Selling',
-                    products: homeData.dailyBestSelling,
-                  ),
-                  
-                  const SizedBox(height: 24),
-                  
-                  // Recently Added
-                  if (homeData.recentlyAdded.isNotEmpty)
+                  // New Arrivals
+                  if (homeData.newarrivals.isNotEmpty)
                     ProductSectionWidget(
-                      title: 'Recently Added',
-                      products: homeData.recentlyAdded,
-                    ),
-                  
-                  if (homeData.recentlyAdded.isNotEmpty)
-                    const SizedBox(height: 24),
-                  
-                  // Popular Products
-                  if (homeData.popularProducts.isNotEmpty)
-                    ProductSectionWidget(
-                      title: 'Popular Products',
-                      products: homeData.popularProducts,
-                    ),
-                  
-                  if (homeData.popularProducts.isNotEmpty)
-                    const SizedBox(height: 24),
-                  
-                  // Trending Products
-                  if (homeData.trendingProducts.isNotEmpty)
-                    ProductSectionWidget(
-                      title: 'Trending Products',
-                      products: homeData.trendingProducts,
+                      title: 'New Arrivals',
+                      products: homeData.newarrivals,
                     ),
                   
                   const SizedBox(height: 24),

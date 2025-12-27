@@ -21,20 +21,15 @@ HomeResponseModel _$HomeResponseModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$HomeResponseModel {
-  @JsonKey(name: 'banners')
+  int get success => throw _privateConstructorUsedError;
+  String? get message => throw _privateConstructorUsedError;
+  @JsonKey(name: 'banner1')
   List<BannerModel> get banners => throw _privateConstructorUsedError;
-  @JsonKey(name: 'categories')
   List<CategoryModel> get categories => throw _privateConstructorUsedError;
-  @JsonKey(name: 'featured_products')
-  List<ProductModel> get featuredProducts => throw _privateConstructorUsedError;
-  @JsonKey(name: 'daily_best_selling')
-  List<ProductModel> get dailyBestSelling => throw _privateConstructorUsedError;
-  @JsonKey(name: 'recently_added')
-  List<ProductModel> get recentlyAdded => throw _privateConstructorUsedError;
-  @JsonKey(name: 'popular_products')
-  List<ProductModel> get popularProducts => throw _privateConstructorUsedError;
-  @JsonKey(name: 'trending_products')
-  List<ProductModel> get trendingProducts => throw _privateConstructorUsedError;
+  List<ProductModel> get newarrivals => throw _privateConstructorUsedError;
+  List<BrandModel> get featuredbrands => throw _privateConstructorUsedError;
+  int get cartcount => throw _privateConstructorUsedError;
+  CurrencyModel? get currency => throw _privateConstructorUsedError;
 
   /// Serializes this HomeResponseModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -54,14 +49,17 @@ abstract class $HomeResponseModelCopyWith<$Res> {
   ) = _$HomeResponseModelCopyWithImpl<$Res, HomeResponseModel>;
   @useResult
   $Res call({
-    @JsonKey(name: 'banners') List<BannerModel> banners,
-    @JsonKey(name: 'categories') List<CategoryModel> categories,
-    @JsonKey(name: 'featured_products') List<ProductModel> featuredProducts,
-    @JsonKey(name: 'daily_best_selling') List<ProductModel> dailyBestSelling,
-    @JsonKey(name: 'recently_added') List<ProductModel> recentlyAdded,
-    @JsonKey(name: 'popular_products') List<ProductModel> popularProducts,
-    @JsonKey(name: 'trending_products') List<ProductModel> trendingProducts,
+    int success,
+    String? message,
+    @JsonKey(name: 'banner1') List<BannerModel> banners,
+    List<CategoryModel> categories,
+    List<ProductModel> newarrivals,
+    List<BrandModel> featuredbrands,
+    int cartcount,
+    CurrencyModel? currency,
   });
+
+  $CurrencyModelCopyWith<$Res>? get currency;
 }
 
 /// @nodoc
@@ -79,16 +77,25 @@ class _$HomeResponseModelCopyWithImpl<$Res, $Val extends HomeResponseModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? success = null,
+    Object? message = freezed,
     Object? banners = null,
     Object? categories = null,
-    Object? featuredProducts = null,
-    Object? dailyBestSelling = null,
-    Object? recentlyAdded = null,
-    Object? popularProducts = null,
-    Object? trendingProducts = null,
+    Object? newarrivals = null,
+    Object? featuredbrands = null,
+    Object? cartcount = null,
+    Object? currency = freezed,
   }) {
     return _then(
       _value.copyWith(
+            success: null == success
+                ? _value.success
+                : success // ignore: cast_nullable_to_non_nullable
+                      as int,
+            message: freezed == message
+                ? _value.message
+                : message // ignore: cast_nullable_to_non_nullable
+                      as String?,
             banners: null == banners
                 ? _value.banners
                 : banners // ignore: cast_nullable_to_non_nullable
@@ -97,29 +104,39 @@ class _$HomeResponseModelCopyWithImpl<$Res, $Val extends HomeResponseModel>
                 ? _value.categories
                 : categories // ignore: cast_nullable_to_non_nullable
                       as List<CategoryModel>,
-            featuredProducts: null == featuredProducts
-                ? _value.featuredProducts
-                : featuredProducts // ignore: cast_nullable_to_non_nullable
+            newarrivals: null == newarrivals
+                ? _value.newarrivals
+                : newarrivals // ignore: cast_nullable_to_non_nullable
                       as List<ProductModel>,
-            dailyBestSelling: null == dailyBestSelling
-                ? _value.dailyBestSelling
-                : dailyBestSelling // ignore: cast_nullable_to_non_nullable
-                      as List<ProductModel>,
-            recentlyAdded: null == recentlyAdded
-                ? _value.recentlyAdded
-                : recentlyAdded // ignore: cast_nullable_to_non_nullable
-                      as List<ProductModel>,
-            popularProducts: null == popularProducts
-                ? _value.popularProducts
-                : popularProducts // ignore: cast_nullable_to_non_nullable
-                      as List<ProductModel>,
-            trendingProducts: null == trendingProducts
-                ? _value.trendingProducts
-                : trendingProducts // ignore: cast_nullable_to_non_nullable
-                      as List<ProductModel>,
+            featuredbrands: null == featuredbrands
+                ? _value.featuredbrands
+                : featuredbrands // ignore: cast_nullable_to_non_nullable
+                      as List<BrandModel>,
+            cartcount: null == cartcount
+                ? _value.cartcount
+                : cartcount // ignore: cast_nullable_to_non_nullable
+                      as int,
+            currency: freezed == currency
+                ? _value.currency
+                : currency // ignore: cast_nullable_to_non_nullable
+                      as CurrencyModel?,
           )
           as $Val,
     );
+  }
+
+  /// Create a copy of HomeResponseModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CurrencyModelCopyWith<$Res>? get currency {
+    if (_value.currency == null) {
+      return null;
+    }
+
+    return $CurrencyModelCopyWith<$Res>(_value.currency!, (value) {
+      return _then(_value.copyWith(currency: value) as $Val);
+    });
   }
 }
 
@@ -133,14 +150,18 @@ abstract class _$$HomeResponseModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    @JsonKey(name: 'banners') List<BannerModel> banners,
-    @JsonKey(name: 'categories') List<CategoryModel> categories,
-    @JsonKey(name: 'featured_products') List<ProductModel> featuredProducts,
-    @JsonKey(name: 'daily_best_selling') List<ProductModel> dailyBestSelling,
-    @JsonKey(name: 'recently_added') List<ProductModel> recentlyAdded,
-    @JsonKey(name: 'popular_products') List<ProductModel> popularProducts,
-    @JsonKey(name: 'trending_products') List<ProductModel> trendingProducts,
+    int success,
+    String? message,
+    @JsonKey(name: 'banner1') List<BannerModel> banners,
+    List<CategoryModel> categories,
+    List<ProductModel> newarrivals,
+    List<BrandModel> featuredbrands,
+    int cartcount,
+    CurrencyModel? currency,
   });
+
+  @override
+  $CurrencyModelCopyWith<$Res>? get currency;
 }
 
 /// @nodoc
@@ -157,16 +178,25 @@ class __$$HomeResponseModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? success = null,
+    Object? message = freezed,
     Object? banners = null,
     Object? categories = null,
-    Object? featuredProducts = null,
-    Object? dailyBestSelling = null,
-    Object? recentlyAdded = null,
-    Object? popularProducts = null,
-    Object? trendingProducts = null,
+    Object? newarrivals = null,
+    Object? featuredbrands = null,
+    Object? cartcount = null,
+    Object? currency = freezed,
   }) {
     return _then(
       _$HomeResponseModelImpl(
+        success: null == success
+            ? _value.success
+            : success // ignore: cast_nullable_to_non_nullable
+                  as int,
+        message: freezed == message
+            ? _value.message
+            : message // ignore: cast_nullable_to_non_nullable
+                  as String?,
         banners: null == banners
             ? _value._banners
             : banners // ignore: cast_nullable_to_non_nullable
@@ -175,26 +205,22 @@ class __$$HomeResponseModelImplCopyWithImpl<$Res>
             ? _value._categories
             : categories // ignore: cast_nullable_to_non_nullable
                   as List<CategoryModel>,
-        featuredProducts: null == featuredProducts
-            ? _value._featuredProducts
-            : featuredProducts // ignore: cast_nullable_to_non_nullable
+        newarrivals: null == newarrivals
+            ? _value._newarrivals
+            : newarrivals // ignore: cast_nullable_to_non_nullable
                   as List<ProductModel>,
-        dailyBestSelling: null == dailyBestSelling
-            ? _value._dailyBestSelling
-            : dailyBestSelling // ignore: cast_nullable_to_non_nullable
-                  as List<ProductModel>,
-        recentlyAdded: null == recentlyAdded
-            ? _value._recentlyAdded
-            : recentlyAdded // ignore: cast_nullable_to_non_nullable
-                  as List<ProductModel>,
-        popularProducts: null == popularProducts
-            ? _value._popularProducts
-            : popularProducts // ignore: cast_nullable_to_non_nullable
-                  as List<ProductModel>,
-        trendingProducts: null == trendingProducts
-            ? _value._trendingProducts
-            : trendingProducts // ignore: cast_nullable_to_non_nullable
-                  as List<ProductModel>,
+        featuredbrands: null == featuredbrands
+            ? _value._featuredbrands
+            : featuredbrands // ignore: cast_nullable_to_non_nullable
+                  as List<BrandModel>,
+        cartcount: null == cartcount
+            ? _value.cartcount
+            : cartcount // ignore: cast_nullable_to_non_nullable
+                  as int,
+        currency: freezed == currency
+            ? _value.currency
+            : currency // ignore: cast_nullable_to_non_nullable
+                  as CurrencyModel?,
       ),
     );
   }
@@ -204,33 +230,30 @@ class __$$HomeResponseModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$HomeResponseModelImpl implements _HomeResponseModel {
   const _$HomeResponseModelImpl({
-    @JsonKey(name: 'banners') final List<BannerModel> banners = const [],
-    @JsonKey(name: 'categories')
+    this.success = 0,
+    this.message,
+    @JsonKey(name: 'banner1') final List<BannerModel> banners = const [],
     final List<CategoryModel> categories = const [],
-    @JsonKey(name: 'featured_products')
-    final List<ProductModel> featuredProducts = const [],
-    @JsonKey(name: 'daily_best_selling')
-    final List<ProductModel> dailyBestSelling = const [],
-    @JsonKey(name: 'recently_added')
-    final List<ProductModel> recentlyAdded = const [],
-    @JsonKey(name: 'popular_products')
-    final List<ProductModel> popularProducts = const [],
-    @JsonKey(name: 'trending_products')
-    final List<ProductModel> trendingProducts = const [],
+    final List<ProductModel> newarrivals = const [],
+    final List<BrandModel> featuredbrands = const [],
+    this.cartcount = 0,
+    this.currency,
   }) : _banners = banners,
        _categories = categories,
-       _featuredProducts = featuredProducts,
-       _dailyBestSelling = dailyBestSelling,
-       _recentlyAdded = recentlyAdded,
-       _popularProducts = popularProducts,
-       _trendingProducts = trendingProducts;
+       _newarrivals = newarrivals,
+       _featuredbrands = featuredbrands;
 
   factory _$HomeResponseModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$HomeResponseModelImplFromJson(json);
 
+  @override
+  @JsonKey()
+  final int success;
+  @override
+  final String? message;
   final List<BannerModel> _banners;
   @override
-  @JsonKey(name: 'banners')
+  @JsonKey(name: 'banner1')
   List<BannerModel> get banners {
     if (_banners is EqualUnmodifiableListView) return _banners;
     // ignore: implicit_dynamic_type
@@ -239,64 +262,40 @@ class _$HomeResponseModelImpl implements _HomeResponseModel {
 
   final List<CategoryModel> _categories;
   @override
-  @JsonKey(name: 'categories')
+  @JsonKey()
   List<CategoryModel> get categories {
     if (_categories is EqualUnmodifiableListView) return _categories;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_categories);
   }
 
-  final List<ProductModel> _featuredProducts;
+  final List<ProductModel> _newarrivals;
   @override
-  @JsonKey(name: 'featured_products')
-  List<ProductModel> get featuredProducts {
-    if (_featuredProducts is EqualUnmodifiableListView)
-      return _featuredProducts;
+  @JsonKey()
+  List<ProductModel> get newarrivals {
+    if (_newarrivals is EqualUnmodifiableListView) return _newarrivals;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_featuredProducts);
+    return EqualUnmodifiableListView(_newarrivals);
   }
 
-  final List<ProductModel> _dailyBestSelling;
+  final List<BrandModel> _featuredbrands;
   @override
-  @JsonKey(name: 'daily_best_selling')
-  List<ProductModel> get dailyBestSelling {
-    if (_dailyBestSelling is EqualUnmodifiableListView)
-      return _dailyBestSelling;
+  @JsonKey()
+  List<BrandModel> get featuredbrands {
+    if (_featuredbrands is EqualUnmodifiableListView) return _featuredbrands;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_dailyBestSelling);
+    return EqualUnmodifiableListView(_featuredbrands);
   }
 
-  final List<ProductModel> _recentlyAdded;
   @override
-  @JsonKey(name: 'recently_added')
-  List<ProductModel> get recentlyAdded {
-    if (_recentlyAdded is EqualUnmodifiableListView) return _recentlyAdded;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_recentlyAdded);
-  }
-
-  final List<ProductModel> _popularProducts;
+  @JsonKey()
+  final int cartcount;
   @override
-  @JsonKey(name: 'popular_products')
-  List<ProductModel> get popularProducts {
-    if (_popularProducts is EqualUnmodifiableListView) return _popularProducts;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_popularProducts);
-  }
-
-  final List<ProductModel> _trendingProducts;
-  @override
-  @JsonKey(name: 'trending_products')
-  List<ProductModel> get trendingProducts {
-    if (_trendingProducts is EqualUnmodifiableListView)
-      return _trendingProducts;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_trendingProducts);
-  }
+  final CurrencyModel? currency;
 
   @override
   String toString() {
-    return 'HomeResponseModel(banners: $banners, categories: $categories, featuredProducts: $featuredProducts, dailyBestSelling: $dailyBestSelling, recentlyAdded: $recentlyAdded, popularProducts: $popularProducts, trendingProducts: $trendingProducts)';
+    return 'HomeResponseModel(success: $success, message: $message, banners: $banners, categories: $categories, newarrivals: $newarrivals, featuredbrands: $featuredbrands, cartcount: $cartcount, currency: $currency)';
   }
 
   @override
@@ -304,44 +303,39 @@ class _$HomeResponseModelImpl implements _HomeResponseModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$HomeResponseModelImpl &&
+            (identical(other.success, success) || other.success == success) &&
+            (identical(other.message, message) || other.message == message) &&
             const DeepCollectionEquality().equals(other._banners, _banners) &&
             const DeepCollectionEquality().equals(
               other._categories,
               _categories,
             ) &&
             const DeepCollectionEquality().equals(
-              other._featuredProducts,
-              _featuredProducts,
+              other._newarrivals,
+              _newarrivals,
             ) &&
             const DeepCollectionEquality().equals(
-              other._dailyBestSelling,
-              _dailyBestSelling,
+              other._featuredbrands,
+              _featuredbrands,
             ) &&
-            const DeepCollectionEquality().equals(
-              other._recentlyAdded,
-              _recentlyAdded,
-            ) &&
-            const DeepCollectionEquality().equals(
-              other._popularProducts,
-              _popularProducts,
-            ) &&
-            const DeepCollectionEquality().equals(
-              other._trendingProducts,
-              _trendingProducts,
-            ));
+            (identical(other.cartcount, cartcount) ||
+                other.cartcount == cartcount) &&
+            (identical(other.currency, currency) ||
+                other.currency == currency));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
     runtimeType,
+    success,
+    message,
     const DeepCollectionEquality().hash(_banners),
     const DeepCollectionEquality().hash(_categories),
-    const DeepCollectionEquality().hash(_featuredProducts),
-    const DeepCollectionEquality().hash(_dailyBestSelling),
-    const DeepCollectionEquality().hash(_recentlyAdded),
-    const DeepCollectionEquality().hash(_popularProducts),
-    const DeepCollectionEquality().hash(_trendingProducts),
+    const DeepCollectionEquality().hash(_newarrivals),
+    const DeepCollectionEquality().hash(_featuredbrands),
+    cartcount,
+    currency,
   );
 
   /// Create a copy of HomeResponseModel
@@ -363,42 +357,36 @@ class _$HomeResponseModelImpl implements _HomeResponseModel {
 
 abstract class _HomeResponseModel implements HomeResponseModel {
   const factory _HomeResponseModel({
-    @JsonKey(name: 'banners') final List<BannerModel> banners,
-    @JsonKey(name: 'categories') final List<CategoryModel> categories,
-    @JsonKey(name: 'featured_products')
-    final List<ProductModel> featuredProducts,
-    @JsonKey(name: 'daily_best_selling')
-    final List<ProductModel> dailyBestSelling,
-    @JsonKey(name: 'recently_added') final List<ProductModel> recentlyAdded,
-    @JsonKey(name: 'popular_products') final List<ProductModel> popularProducts,
-    @JsonKey(name: 'trending_products')
-    final List<ProductModel> trendingProducts,
+    final int success,
+    final String? message,
+    @JsonKey(name: 'banner1') final List<BannerModel> banners,
+    final List<CategoryModel> categories,
+    final List<ProductModel> newarrivals,
+    final List<BrandModel> featuredbrands,
+    final int cartcount,
+    final CurrencyModel? currency,
   }) = _$HomeResponseModelImpl;
 
   factory _HomeResponseModel.fromJson(Map<String, dynamic> json) =
       _$HomeResponseModelImpl.fromJson;
 
   @override
-  @JsonKey(name: 'banners')
+  int get success;
+  @override
+  String? get message;
+  @override
+  @JsonKey(name: 'banner1')
   List<BannerModel> get banners;
   @override
-  @JsonKey(name: 'categories')
   List<CategoryModel> get categories;
   @override
-  @JsonKey(name: 'featured_products')
-  List<ProductModel> get featuredProducts;
+  List<ProductModel> get newarrivals;
   @override
-  @JsonKey(name: 'daily_best_selling')
-  List<ProductModel> get dailyBestSelling;
+  List<BrandModel> get featuredbrands;
   @override
-  @JsonKey(name: 'recently_added')
-  List<ProductModel> get recentlyAdded;
+  int get cartcount;
   @override
-  @JsonKey(name: 'popular_products')
-  List<ProductModel> get popularProducts;
-  @override
-  @JsonKey(name: 'trending_products')
-  List<ProductModel> get trendingProducts;
+  CurrencyModel? get currency;
 
   /// Create a copy of HomeResponseModel
   /// with the given fields replaced by the non-null parameter values.

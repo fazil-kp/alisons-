@@ -6,6 +6,7 @@ part 'login_response_model.g.dart';
 @freezed
 class LoginResponseModel with _$LoginResponseModel {
   const factory LoginResponseModel({
+    @JsonKey(name: 'id') int? id,
     @JsonKey(name: 'token') String? token,
     @JsonKey(name: 'user') Map<String, dynamic>? user,
     String? message,

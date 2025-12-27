@@ -1,4 +1,3 @@
-import '../../core/constants/app_constants.dart';
 import '../../core/utils/logger.dart';
 import '../models/product_model.dart';
 import '../models/products_response_model.dart';
@@ -10,23 +9,35 @@ class ProductsRepository {
   ProductsRepository(this._apiService);
 
   Future<ProductsResponseModel> getProducts({
-    String? categorySlug,
-    int page = 1,
-    int perPage = 20,
+    required int id,
+    required String token,
+    String locale = 'en',
+    String? by, // category, brand, store, search
+    String? value,
+    int? page,
+    String? sortBy,
   }) async {
     try {
       final queryParams = <String, dynamic>{
-        'page': page,
-        'per_page': perPage,
+        'id': id,
+        'token': token,
       };
 
-      if (categorySlug != null) {
-        queryParams['by'] = 'category';
-        queryParams['value'] = categorySlug;
+      if (by != null && value != null) {
+        queryParams['by'] = by;
+        queryParams['value'] = value;
+      }
+
+      if (page != null) {
+        queryParams['page'] = page;
+      }
+
+      if (sortBy != null) {
+        queryParams['sort_by'] = sortBy;
       }
 
       final response = await _apiService.get(
-        AppConstants.productsEndpoint,
+        '/products/$locale',
         queryParameters: queryParams,
       );
 
@@ -50,11 +61,26 @@ class ProductsRepository {
     }
   }
 
-  Future<ProductModel> getProductDetails(int productId) async {
+  Future<ProductModel> getProductDetails({
+    required String slug,
+    required int id,
+    required String token,
+    String locale = 'en',
+    String? store,
+  }) async {
     try {
+      final queryParams = <String, dynamic>{
+        'id': id,
+        'token': token,
+      };
+
+      if (store != null) {
+        queryParams['store'] = store;
+      }
+
       final response = await _apiService.get(
-        AppConstants.productDetailsEndpoint,
-        queryParameters: {'id': productId},
+        '/product-details/$locale/$slug',
+        queryParameters: queryParams,
       );
 
       if (response.statusCode == 200) {

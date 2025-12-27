@@ -8,46 +8,28 @@ class AuthRepository {
 
   AuthRepository(this._apiService);
 
-  Future<LoginResponseModel> login(String email, String password) async {
+  Future<LoginResponseModel> login(String emailPhone, String password) async {
     try {
-      // Hardcoded validation for now
-      if (email == AppConstants.defaultEmail &&
-          password == AppConstants.defaultPassword) {
-        return const LoginResponseModel(
-          success: true,
-          token: 'mock_token',
-          message: 'Login successful',
-        );
-      }
-
-      // Try API call if available
-      try {
-        final response = await _apiService.post(
-          AppConstants.loginEndpoint,
-          data: {
-            'email': email,
-            'password': password,
-          },
-        );
-
-        if (response.statusCode == 200) {
-          return LoginResponseModel.fromJson(response.data);
-        }
-      } catch (e) {
-        Logger.d('API login failed, using hardcoded validation');
-      }
-
-      // If API fails, return error
-      return const LoginResponseModel(
-        success: false,
-        message: 'Invalid credentials',
+      final response = await _apiService.post(
+        AppConstants.loginEndpoint,
+        data: {
+          'email_phone': emailPhone,
+          'password': password,
+        },
       );
+
+      if (response.statusCode == 200) {
+        final data = response.data;
+        if (data is Map<String, dynamic>) {
+          return LoginResponseModel.fromJson(data);
+        }
+        throw Exception('Invalid response format');
+      }
+
+      throw Exception('Login failed with status code: ${response.statusCode}');
     } catch (e) {
       Logger.e('Login error', 'AuthRepository', e);
-      return const LoginResponseModel(
-        success: false,
-        message: 'Login failed. Please try again.',
-      );
+      rethrow;
     }
   }
 }

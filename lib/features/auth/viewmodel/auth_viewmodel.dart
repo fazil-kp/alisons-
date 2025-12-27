@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../../data/repositories/auth_repository.dart';
+import '../../../core/services/auth_service.dart';
 
 class AuthViewModel extends ChangeNotifier {
   final AuthRepository _authRepository;
+  final AuthService _authService = AuthService();
 
   AuthViewModel(this._authRepository);
 
@@ -19,8 +21,8 @@ class AuthViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<bool> login(String email, String password) async {
-    if (email.isEmpty || password.isEmpty) {
+  Future<bool> login(String emailPhone, String password) async {
+    if (emailPhone.isEmpty || password.isEmpty) {
       _errorMessage = 'Please fill in all fields';
       notifyListeners();
       return false;
@@ -31,11 +33,13 @@ class AuthViewModel extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final response = await _authRepository.login(email, password);
+      final response = await _authRepository.login(emailPhone, password);
 
       _isLoading = false;
 
-      if (response.success) {
+      if (response.success && response.id != null && response.token != null) {
+        // Store credentials
+        _authService.setCredentials(response.id!, response.token!);
         _errorMessage = null;
         notifyListeners();
         return true;

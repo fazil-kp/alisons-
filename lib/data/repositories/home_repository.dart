@@ -1,4 +1,3 @@
-import '../../core/constants/app_constants.dart';
 import '../../core/utils/logger.dart';
 import '../models/home_response_model.dart';
 import '../services/api_service.dart';
@@ -8,9 +7,19 @@ class HomeRepository {
 
   HomeRepository(this._apiService);
 
-  Future<HomeResponseModel> getHomeData() async {
+  Future<HomeResponseModel> getHomeData({
+    required int id,
+    required String token,
+    String locale = 'en',
+  }) async {
     try {
-      final response = await _apiService.get(AppConstants.homeEndpoint);
+      final response = await _apiService.get(
+        '/home/$locale',
+        queryParameters: {
+          'id': id,
+          'token': token,
+        },
+      );
 
       if (response.statusCode == 200) {
         final data = response.data;
