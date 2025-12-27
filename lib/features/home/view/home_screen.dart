@@ -5,7 +5,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../viewmodel/home_viewmodel.dart';
 import '../../../features/cart/viewmodel/cart_viewmodel.dart';
 import '../../../core/theme/app_theme.dart';
-import '../../../core/constants/app_constants.dart';
 import '../../../core/utils/extensions.dart';
 import 'widgets/banner_carousel_widget.dart';
 import 'widgets/category_item_widget.dart';

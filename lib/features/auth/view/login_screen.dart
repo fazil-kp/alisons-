@@ -46,41 +46,45 @@ class _LoginScreenState extends State<LoginScreen> {
     return ChangeNotifierProvider(
       create: (_) => AuthViewModel(AuthRepository(ApiService()), AuthService()),
       child: Scaffold(
-        backgroundColor: AppTheme.darkGrey,
+        backgroundColor: const Color(0xFF2D2D2D),
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
               children: [
-                // Header
+                // Image Section with Skip button
                 Container(
-                  padding: const EdgeInsets.all(16),
-                  child: Row(
-                    children: [Text('Email Log in', style: context.textTheme.titleLarge?.copyWith(color: AppTheme.white))],
-                  ),
-                ),
-
-                // Image Section
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.4,
-                  decoration: BoxDecoration(
-                    color: AppTheme.lightGrey,
-                    borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
+                  height: MediaQuery.of(context).size.height * 0.5,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/vegetables.jpg'), // Replace with your image
+                      fit: BoxFit.cover,
+                    ),
                   ),
                   child: Stack(
                     children: [
-                      // Placeholder for food image
+                      // Gradient overlay for better text visibility
                       Container(
                         decoration: BoxDecoration(
-                          gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Colors.brown.shade200, Colors.brown.shade100]),
+                          gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Colors.black.withOpacity(0.3), Colors.transparent]),
                         ),
-                        child: Center(child: Icon(Icons.food_bank, size: 100, color: Colors.brown.shade400)),
                       ),
+                      // Skip button
                       Positioned(
                         top: 16,
                         right: 16,
                         child: TextButton(
                           onPressed: () => context.go('/home'),
-                          child: const Text('Skip >', style: TextStyle(color: AppTheme.white)),
+                          style: TextButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8)),
+                          child: const Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                'Skip ',
+                                style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
+                              ),
+                              Icon(Icons.arrow_forward, color: Colors.white, size: 18),
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -89,8 +93,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 // Login Form
                 Container(
-                  padding: const EdgeInsets.all(24),
-                  decoration: const BoxDecoration(color: AppTheme.white),
+                  padding: const EdgeInsets.all(32),
+                  decoration: const BoxDecoration(color: Color(0xFFF5F5F5)),
                   child: Form(
                     key: _formKey,
                     child: Consumer<AuthViewModel>(
@@ -98,45 +102,82 @@ class _LoginScreenState extends State<LoginScreen> {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            Text('Login', style: context.textTheme.displayMedium),
+                            // Login Title
+                            const Text(
+                              'Login',
+                              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.black87),
+                            ),
                             const SizedBox(height: 32),
 
                             // Email Field
-                            TextFormField(
-                              controller: _emailController,
-                              keyboardType: TextInputType.emailAddress,
-                              decoration: const InputDecoration(labelText: 'Email Address'),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter your email';
-                                }
-                                if (!value.contains('@')) {
-                                  return 'Please enter a valid email';
-                                }
-                                return null;
-                              },
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Email Address',
+                                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.black87),
+                                ),
+                                const SizedBox(height: 8),
+                                TextFormField(
+                                  controller: _emailController,
+                                  keyboardType: TextInputType.emailAddress,
+                                  decoration: InputDecoration(
+                                    hintText: 'Johndoe@Gmail.Com',
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none),
+                                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter your email';
+                                    }
+                                    if (!value.contains('@')) {
+                                      return 'Please enter a valid email';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ],
                             ),
-                            const SizedBox(height: 16),
+                            const SizedBox(height: 24),
 
                             // Password Field
-                            TextFormField(
-                              controller: _passwordController,
-                              obscureText: !viewModel.isPasswordVisible,
-                              decoration: InputDecoration(
-                                labelText: 'Password',
-                                suffixIcon: IconButton(icon: Icon(viewModel.isPasswordVisible ? Icons.visibility : Icons.visibility_off), onPressed: viewModel.togglePasswordVisibility),
-                              ),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter your password';
-                                }
-                                if (value.length < 6) {
-                                  return 'Password must be at least 6 characters';
-                                }
-                                return null;
-                              },
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Password',
+                                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.black87),
+                                ),
+                                const SizedBox(height: 8),
+                                TextFormField(
+                                  controller: _passwordController,
+                                  obscureText: !viewModel.isPasswordVisible,
+                                  decoration: InputDecoration(
+                                    hintText: '••••••••',
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none),
+                                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                                    suffixIcon: IconButton(
+                                      icon: Icon(viewModel.isPasswordVisible ? Icons.visibility_outlined : Icons.visibility_off_outlined, color: Colors.grey),
+                                      onPressed: viewModel.togglePasswordVisibility,
+                                    ),
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter your password';
+                                    }
+                                    if (value.length < 6) {
+                                      return 'Password must be at least 6 characters';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ],
                             ),
-                            const SizedBox(height: 8),
+                            const SizedBox(height: 16),
 
                             // Forgot Password
                             Align(
@@ -145,7 +186,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                 onPressed: () {
                                   // TODO: Implement forgot password
                                 },
-                                child: const Text('Forgot password?'),
+                                style: TextButton.styleFrom(padding: EdgeInsets.zero),
+                                child: const Text(
+                                  'Forgot password?',
+                                  style: TextStyle(color: Colors.black87, decoration: TextDecoration.underline, fontSize: 14),
+                                ),
                               ),
                             ),
                             const SizedBox(height: 24),
@@ -153,8 +198,18 @@ class _LoginScreenState extends State<LoginScreen> {
                             // Login Button
                             ElevatedButton(
                               onPressed: viewModel.isLoading ? null : _handleLogin,
-                              style: ElevatedButton.styleFrom(backgroundColor: AppTheme.primaryColor, padding: const EdgeInsets.symmetric(vertical: 16)),
-                              child: viewModel.isLoading ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(AppTheme.white))) : const Text('Login', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFF8B4513),
+                                padding: const EdgeInsets.symmetric(vertical: 18),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                elevation: 0,
+                              ),
+                              child: viewModel.isLoading
+                                  ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(Colors.white)))
+                                  : const Text(
+                                      'Login',
+                                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white),
+                                    ),
                             ),
                             const SizedBox(height: 24),
 
@@ -162,12 +217,16 @@ class _LoginScreenState extends State<LoginScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const Text("Don't Have an account? "),
+                                const Text("Don't Have an account? ", style: TextStyle(color: Colors.black87, fontSize: 14)),
                                 TextButton(
                                   onPressed: () {
                                     // TODO: Navigate to sign up
                                   },
-                                  child: const Text('Sign Up', style: TextStyle(decoration: TextDecoration.underline)),
+                                  style: TextButton.styleFrom(padding: EdgeInsets.zero, minimumSize: Size.zero, tapTargetSize: MaterialTapTargetSize.shrinkWrap),
+                                  child: const Text(
+                                    'Sign Up',
+                                    style: TextStyle(decoration: TextDecoration.underline, fontSize: 14, fontWeight: FontWeight.w600),
+                                  ),
                                 ),
                               ],
                             ),
