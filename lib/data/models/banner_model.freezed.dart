@@ -186,7 +186,7 @@ class __$$BannerModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$BannerModelImpl implements _BannerModel {
   const _$BannerModelImpl({
-    required this.id,
+    this.id = 0,
     this.title,
     this.subtitle,
     @JsonKey(name: 'image') this.imageUrl,
@@ -198,6 +198,7 @@ class _$BannerModelImpl implements _BannerModel {
       _$$BannerModelImplFromJson(json);
 
   @override
+  @JsonKey()
   final int id;
   @override
   final String? title;
@@ -261,7 +262,7 @@ class _$BannerModelImpl implements _BannerModel {
 
 abstract class _BannerModel implements BannerModel {
   const factory _BannerModel({
-    required final int id,
+    final int id,
     final String? title,
     final String? subtitle,
     @JsonKey(name: 'image') final String? imageUrl,

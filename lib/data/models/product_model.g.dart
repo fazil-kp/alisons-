@@ -8,12 +8,12 @@ part of 'product_model.dart';
 
 _$ProductModelImpl _$$ProductModelImplFromJson(Map<String, dynamic> json) =>
     _$ProductModelImpl(
-      id: (json['id'] as num).toInt(),
+      id: (json['id'] as num?)?.toInt() ?? 0,
       name: json['name'] as String,
       slug: json['slug'] as String?,
       description: json['description'] as String?,
       imageUrl: json['image'] as String?,
-      currentPrice: (json['price'] as num).toDouble(),
+      currentPrice: (json['price'] as num?)?.toDouble() ?? 0.0,
       originalPrice: (json['original_price'] as num?)?.toDouble(),
       discountPercentage: (json['discount_percentage'] as num?)?.toDouble(),
       category: json['category'] as String?,

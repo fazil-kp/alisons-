@@ -173,7 +173,7 @@ class __$$CategoryModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CategoryModelImpl implements _CategoryModel {
   const _$CategoryModelImpl({
-    required this.id,
+    this.id = 0,
     required this.name,
     this.slug,
     @JsonKey(name: 'image') this.imageUrl,
@@ -184,6 +184,7 @@ class _$CategoryModelImpl implements _CategoryModel {
       _$$CategoryModelImplFromJson(json);
 
   @override
+  @JsonKey()
   final int id;
   @override
   final String name;
@@ -236,7 +237,7 @@ class _$CategoryModelImpl implements _CategoryModel {
 
 abstract class _CategoryModel implements CategoryModel {
   const factory _CategoryModel({
-    required final int id,
+    final int id,
     required final String name,
     final String? slug,
     @JsonKey(name: 'image') final String? imageUrl,

@@ -6,7 +6,7 @@ part 'brand_model.g.dart';
 @freezed
 class BrandModel with _$BrandModel {
   const factory BrandModel({
-    required int id,
+    @Default(0) int id,
     required String name,
     String? slug,
     @JsonKey(name: 'image') String? imageUrl,

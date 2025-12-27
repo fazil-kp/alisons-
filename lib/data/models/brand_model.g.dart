@@ -8,7 +8,7 @@ part of 'brand_model.dart';
 
 _$BrandModelImpl _$$BrandModelImplFromJson(Map<String, dynamic> json) =>
     _$BrandModelImpl(
-      id: (json['id'] as num).toInt(),
+      id: (json['id'] as num?)?.toInt() ?? 0,
       name: json['name'] as String,
       slug: json['slug'] as String?,
       imageUrl: json['image'] as String?,

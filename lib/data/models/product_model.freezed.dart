@@ -269,12 +269,12 @@ class __$$ProductModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ProductModelImpl implements _ProductModel {
   const _$ProductModelImpl({
-    required this.id,
+    this.id = 0,
     required this.name,
     this.slug,
     this.description,
     @JsonKey(name: 'image') this.imageUrl,
-    @JsonKey(name: 'price') required this.currentPrice,
+    @JsonKey(name: 'price') this.currentPrice = 0.0,
     @JsonKey(name: 'original_price') this.originalPrice,
     @JsonKey(name: 'discount_percentage') this.discountPercentage,
     this.category,
@@ -287,6 +287,7 @@ class _$ProductModelImpl implements _ProductModel {
       _$$ProductModelImplFromJson(json);
 
   @override
+  @JsonKey()
   final int id;
   @override
   final String name;
@@ -384,12 +385,12 @@ class _$ProductModelImpl implements _ProductModel {
 
 abstract class _ProductModel implements ProductModel {
   const factory _ProductModel({
-    required final int id,
+    final int id,
     required final String name,
     final String? slug,
     final String? description,
     @JsonKey(name: 'image') final String? imageUrl,
-    @JsonKey(name: 'price') required final double currentPrice,
+    @JsonKey(name: 'price') final double currentPrice,
     @JsonKey(name: 'original_price') final double? originalPrice,
     @JsonKey(name: 'discount_percentage') final double? discountPercentage,
     final String? category,
