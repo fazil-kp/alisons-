@@ -10,13 +10,22 @@ import 'data/repositories/cart_repository.dart';
 import 'features/auth/viewmodel/auth_viewmodel.dart';
 import 'features/home/viewmodel/home_viewmodel.dart';
 import 'features/cart/viewmodel/cart_viewmodel.dart';
+import 'core/services/auth_service.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize AuthService
+  final authService = AuthService();
+  await authService.init();
+
+  runApp(MyApp(authService: authService));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final AuthService authService;
+
+  const MyApp({super.key, required this.authService});
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +40,7 @@ class MyApp extends StatelessWidget {
       providers: [
         // Services
         Provider<ApiService>.value(value: apiService),
+        Provider<AuthService>.value(value: authService),
 
         // Repositories
         Provider<AuthRepository>.value(value: authRepository),
@@ -40,10 +50,10 @@ class MyApp extends StatelessWidget {
 
         // ViewModels
         ChangeNotifierProvider(create: (_) => CartViewModel()),
-        ChangeNotifierProxyProvider<AuthRepository, AuthViewModel>(create: (_) => AuthViewModel(authRepository), update: (_, authRepo, __) => AuthViewModel(authRepo)),
+        ChangeNotifierProxyProvider2<AuthRepository, AuthService, AuthViewModel>(create: (_) => AuthViewModel(authRepository, authService), update: (_, authRepo, authService, __) => AuthViewModel(authRepo, authService)),
         ChangeNotifierProxyProvider<HomeRepository, HomeViewModel>(create: (_) => HomeViewModel(homeRepository), update: (_, homeRepo, __) => HomeViewModel(homeRepo)),
       ],
-      child: MaterialApp.router(title: 'Sungod Home', debugShowCheckedModeBanner: false, theme: AppTheme.lightTheme, routerConfig: AppRouter.router),
+      child: MaterialApp.router(title: 'Sungod Home', debugShowCheckedModeBanner: false, theme: AppTheme.lightTheme, routerConfig: AppRouter.createRouter(authService)),
     );
   }
 }

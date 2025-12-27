@@ -26,66 +26,86 @@ class ProductCardWidget extends StatelessWidget {
         }
       },
       child: Container(
-        width: width ?? 160,
-        margin: const EdgeInsets.only(right: 12),
-        decoration: BoxDecoration(
-          color: AppTheme.white,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.grey.shade200),
-        ),
+        width: width ?? 180,
+        decoration: BoxDecoration(color: const Color(0xFFF5F5F5), borderRadius: BorderRadius.circular(16)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Product Image
-            Stack(
-              children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
-                  child: CachedNetworkImage(
-                    imageUrl: product.imageUrl?.imageUrl ?? '',
-                    width: double.infinity,
-                    height: 120,
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => Container(
+            // Product Image Section with rounded white background
+            Container(
+              margin: const EdgeInsets.all(12),
+              decoration: BoxDecoration(color: AppTheme.white, borderRadius: BorderRadius.circular(16)),
+              child: Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: CachedNetworkImage(
+                      imageUrl: product.imageUrl?.imageUrl ?? '',
                       width: double.infinity,
-                      height: 120,
-                      color: Colors.grey.shade200,
-                      child: const Center(child: CircularProgressIndicator()),
-                    ),
-                    errorWidget: (context, url, error) => Container(width: double.infinity, height: 120, color: Colors.grey.shade200, child: const Icon(Icons.image_not_supported)),
-                  ),
-                ),
-                // Discount Badge
-                if (product.discountPercentage != null && product.discountPercentage! > 0)
-                  Positioned(
-                    top: 8,
-                    left: 8,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-                      decoration: BoxDecoration(color: AppTheme.primaryColor, borderRadius: BorderRadius.circular(4)),
-                      child: Text(
-                        '${product.discountPercentage!.toInt()}% off',
-                        style: const TextStyle(color: AppTheme.white, fontSize: 10, fontWeight: FontWeight.bold),
+                      height: 160,
+                      fit: BoxFit.contain,
+                      placeholder: (context, url) => Container(
+                        width: double.infinity,
+                        height: 160,
+                        color: AppTheme.white,
+                        child: Center(child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(AppTheme.primaryColor))),
+                      ),
+                      errorWidget: (context, url, error) => Container(
+                        width: double.infinity,
+                        height: 160,
+                        color: AppTheme.white,
+                        child: Icon(Icons.image_not_supported, color: Colors.grey.shade300, size: 40),
                       ),
                     ),
                   ),
-                // Wishlist Icon
-                Positioned(
-                  top: 8,
-                  right: 8,
-                  child: IconButton(
-                    icon: const Icon(Icons.favorite_border, color: AppTheme.white, size: 20),
-                    onPressed: () {
-                      // TODO: Implement wishlist
-                    },
+
+                  // Discount Badge
+                  if (product.discountPercentage != null && product.discountPercentage! > 0)
+                    Positioned(
+                      top: 8,
+                      left: 8,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(color: AppTheme.primaryColor, borderRadius: BorderRadius.circular(6)),
+                        child: Text(
+                          '${product.discountPercentage!.toInt()}% OFF',
+                          style: const TextStyle(color: AppTheme.white, fontSize: 10, fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                    ),
+
+                  // Wishlist Heart Icon
+                  Positioned(
+                    top: 8,
+                    right: 8,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: AppTheme.white,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.grey.shade300, width: 1.5),
+                      ),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(20),
+                          onTap: () {
+                            // TODO: Implement wishlist
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(6),
+                            child: Icon(Icons.favorite_border, color: Colors.grey.shade700, size: 18),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
 
-            // Product Info
+            // Product Info Section
             Padding(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -93,7 +113,7 @@ class ProductCardWidget extends StatelessWidget {
                   if (product.category != null)
                     Text(
                       product.category!,
-                      style: context.textTheme.bodySmall?.copyWith(color: Colors.grey.shade600),
+                      style: TextStyle(color: const Color(0xFF8B4513), fontSize: 12, fontWeight: FontWeight.w500),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -102,48 +122,67 @@ class ProductCardWidget extends StatelessWidget {
                   // Product Name
                   Text(
                     product.name,
-                    style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                    style: const TextStyle(color: Color(0xFF2C2C2C), fontSize: 15, fontWeight: FontWeight.w600, height: 1.3),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 8),
 
-                  // Price
+                  // Price Section
                   Row(
                     children: [
                       Text(
-                        '₹${product.currentPrice.toStringAsFixed(2)}',
-                        style: context.textTheme.titleSmall?.copyWith(color: AppTheme.primaryColor, fontWeight: FontWeight.bold),
+                        '₹ ${product.currentPrice.toStringAsFixed(2)}',
+                        style: const TextStyle(color: Color(0xFFD84315), fontSize: 16, fontWeight: FontWeight.w700),
                       ),
                       if (product.originalPrice != null && product.originalPrice! > product.currentPrice) ...[
-                        const SizedBox(width: 4),
+                        const SizedBox(width: 8),
                         Text(
-                          '₹${product.originalPrice!.toStringAsFixed(2)}',
-                          style: context.textTheme.bodySmall?.copyWith(decoration: TextDecoration.lineThrough, color: Colors.grey),
+                          '₹ ${product.originalPrice!.toStringAsFixed(2)}',
+                          style: TextStyle(decoration: TextDecoration.lineThrough, color: Colors.grey.shade600, fontSize: 13, fontWeight: FontWeight.w500),
                         ),
                       ],
                     ],
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 12),
 
                   // Add to Cart / Quantity Control
                   if (isInCart && quantity > 0)
                     Container(
-                      decoration: BoxDecoration(color: AppTheme.primaryColor, borderRadius: BorderRadius.circular(8)),
+                      height: 44,
+                      decoration: BoxDecoration(color: const Color(0xFF8B4513), borderRadius: BorderRadius.circular(12)),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          IconButton(
-                            icon: const Icon(Icons.remove, color: AppTheme.white, size: 18),
-                            onPressed: () => cartViewModel.decrementQuantity(product.id),
+                          Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              borderRadius: const BorderRadius.horizontal(left: Radius.circular(12)),
+                              onTap: () => cartViewModel.decrementQuantity(product.id),
+                              child: Container(
+                                width: 44,
+                                height: 44,
+                                alignment: Alignment.center,
+                                child: const Icon(Icons.remove, color: AppTheme.white, size: 20),
+                              ),
+                            ),
                           ),
                           Text(
                             '$quantity',
-                            style: const TextStyle(color: AppTheme.white, fontWeight: FontWeight.bold),
+                            style: const TextStyle(color: AppTheme.white, fontWeight: FontWeight.w700, fontSize: 16),
                           ),
-                          IconButton(
-                            icon: const Icon(Icons.add, color: AppTheme.white, size: 18),
-                            onPressed: () => cartViewModel.incrementQuantity(product.id),
+                          Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              borderRadius: const BorderRadius.horizontal(right: Radius.circular(12)),
+                              onTap: () => cartViewModel.incrementQuantity(product.id),
+                              child: Container(
+                                width: 44,
+                                height: 44,
+                                alignment: Alignment.center,
+                                child: const Icon(Icons.add, color: AppTheme.white, size: 20),
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -151,13 +190,27 @@ class ProductCardWidget extends StatelessWidget {
                   else
                     SizedBox(
                       width: double.infinity,
-                      child: ElevatedButton.icon(
+                      height: 44,
+                      child: OutlinedButton(
                         onPressed: () {
                           cartViewModel.addToCart(product);
                         },
-                        icon: const Icon(Icons.shopping_cart, size: 16),
-                        label: const Text('Add'),
-                        style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 8)),
+                        style: OutlinedButton.styleFrom(
+                          backgroundColor: AppTheme.white,
+                          foregroundColor: const Color(0xFF8B4513),
+                          side: BorderSide(color: Colors.grey.shade300, width: 1.5),
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                          padding: EdgeInsets.zero,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Text('Add', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15)),
+                            SizedBox(width: 8),
+                            Icon(Icons.shopping_cart_outlined, size: 18),
+                          ],
+                        ),
                       ),
                     ),
                 ],

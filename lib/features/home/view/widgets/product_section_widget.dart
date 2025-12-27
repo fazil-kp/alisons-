@@ -9,12 +9,7 @@ class ProductSectionWidget extends StatelessWidget {
   final List<ProductModel> products;
   final VoidCallback? onViewAll;
 
-  const ProductSectionWidget({
-    super.key,
-    required this.title,
-    required this.products,
-    this.onViewAll,
-  });
+  const ProductSectionWidget({super.key, required this.title, required this.products, this.onViewAll});
 
   @override
   Widget build(BuildContext context) {
@@ -32,33 +27,24 @@ class ProductSectionWidget extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: context.textTheme.titleLarge?.copyWith(
-                  color: AppTheme.primaryColor,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: context.textTheme.titleLarge?.copyWith(color: AppTheme.primaryColor, fontWeight: FontWeight.bold),
               ),
-              if (onViewAll != null)
-                TextButton(
-                  onPressed: onViewAll,
-                  child: const Text('View All'),
-                ),
+              if (onViewAll != null) TextButton(onPressed: onViewAll, child: const Text('View All')),
             ],
           ),
         ),
         const SizedBox(height: 12),
-        SizedBox(
-          height: 280,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            itemCount: products.length,
-            itemBuilder: (context, index) {
-              return ProductCardWidget(product: products[index]);
-            },
-          ),
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 12, mainAxisSpacing: 12, mainAxisExtent: 350),
+          itemCount: products.length,
+          itemBuilder: (context, index) {
+            return ProductCardWidget(product: products[index]);
+          },
         ),
       ],
     );
   }
 }
-

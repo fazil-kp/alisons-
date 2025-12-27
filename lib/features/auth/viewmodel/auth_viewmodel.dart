@@ -4,9 +4,9 @@ import '../../../core/services/auth_service.dart';
 
 class AuthViewModel extends ChangeNotifier {
   final AuthRepository _authRepository;
-  final AuthService _authService = AuthService();
+  final AuthService _authService;
 
-  AuthViewModel(this._authRepository);
+  AuthViewModel(this._authRepository, this._authService);
 
   bool _isLoading = false;
   String? _errorMessage;
