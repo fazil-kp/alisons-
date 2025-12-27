@@ -174,7 +174,7 @@ class __$$BrandModelImplCopyWithImpl<$Res>
 class _$BrandModelImpl implements _BrandModel {
   const _$BrandModelImpl({
     this.id = 0,
-    required this.name,
+    this.name = '',
     this.slug,
     @JsonKey(name: 'image') this.imageUrl,
     @JsonKey(name: 'item_count') this.itemCount = 0,
@@ -187,6 +187,7 @@ class _$BrandModelImpl implements _BrandModel {
   @JsonKey()
   final int id;
   @override
+  @JsonKey()
   final String name;
   @override
   final String? slug;
@@ -238,7 +239,7 @@ class _$BrandModelImpl implements _BrandModel {
 abstract class _BrandModel implements BrandModel {
   const factory _BrandModel({
     final int id,
-    required final String name,
+    final String name,
     final String? slug,
     @JsonKey(name: 'image') final String? imageUrl,
     @JsonKey(name: 'item_count') final int itemCount,

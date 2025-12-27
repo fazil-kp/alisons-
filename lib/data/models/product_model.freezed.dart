@@ -270,7 +270,7 @@ class __$$ProductModelImplCopyWithImpl<$Res>
 class _$ProductModelImpl implements _ProductModel {
   const _$ProductModelImpl({
     this.id = 0,
-    required this.name,
+    this.name = '',
     this.slug,
     this.description,
     @JsonKey(name: 'image') this.imageUrl,
@@ -290,6 +290,7 @@ class _$ProductModelImpl implements _ProductModel {
   @JsonKey()
   final int id;
   @override
+  @JsonKey()
   final String name;
   @override
   final String? slug;
@@ -386,7 +387,7 @@ class _$ProductModelImpl implements _ProductModel {
 abstract class _ProductModel implements ProductModel {
   const factory _ProductModel({
     final int id,
-    required final String name,
+    final String name,
     final String? slug,
     final String? description,
     @JsonKey(name: 'image') final String? imageUrl,

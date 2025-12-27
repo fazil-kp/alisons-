@@ -7,7 +7,7 @@ part 'brand_model.g.dart';
 class BrandModel with _$BrandModel {
   const factory BrandModel({
     @Default(0) int id,
-    required String name,
+    @Default('') String name,
     String? slug,
     @JsonKey(name: 'image') String? imageUrl,
     @JsonKey(name: 'item_count') @Default(0) int itemCount,

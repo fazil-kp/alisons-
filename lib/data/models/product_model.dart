@@ -7,7 +7,7 @@ part 'product_model.g.dart';
 class ProductModel with _$ProductModel {
   const factory ProductModel({
     @Default(0) int id,
-    required String name,
+    @Default('') String name,
     String? slug,
     String? description,
     @JsonKey(name: 'image') String? imageUrl,

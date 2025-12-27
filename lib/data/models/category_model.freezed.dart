@@ -174,7 +174,7 @@ class __$$CategoryModelImplCopyWithImpl<$Res>
 class _$CategoryModelImpl implements _CategoryModel {
   const _$CategoryModelImpl({
     this.id = 0,
-    required this.name,
+    this.name = '',
     this.slug,
     @JsonKey(name: 'image') this.imageUrl,
     @JsonKey(name: 'item_count') this.itemCount = 0,
@@ -187,6 +187,7 @@ class _$CategoryModelImpl implements _CategoryModel {
   @JsonKey()
   final int id;
   @override
+  @JsonKey()
   final String name;
   @override
   final String? slug;
@@ -238,7 +239,7 @@ class _$CategoryModelImpl implements _CategoryModel {
 abstract class _CategoryModel implements CategoryModel {
   const factory _CategoryModel({
     final int id,
-    required final String name,
+    final String name,
     final String? slug,
     @JsonKey(name: 'image') final String? imageUrl,
     @JsonKey(name: 'item_count') final int itemCount,
