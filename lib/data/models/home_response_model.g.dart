@@ -9,7 +9,9 @@ part of 'home_response_model.dart';
 _$HomeResponseModelImpl _$$HomeResponseModelImplFromJson(
   Map<String, dynamic> json,
 ) => _$HomeResponseModelImpl(
-  success: (json['success'] as num?)?.toInt() ?? 0,
+  success: json['success'] == null
+      ? 0
+      : const IntConverter().fromJson(json['success']),
   message: json['message'] as String?,
   banners:
       (json['banner1'] as List<dynamic>?)
@@ -31,7 +33,9 @@ _$HomeResponseModelImpl _$$HomeResponseModelImplFromJson(
           ?.map((e) => BrandModel.fromJson(e as Map<String, dynamic>))
           .toList() ??
       const [],
-  cartcount: (json['cartcount'] as num?)?.toInt() ?? 0,
+  cartcount: json['cartcount'] == null
+      ? 0
+      : const IntConverter().fromJson(json['cartcount']),
   currency: json['currency'] == null
       ? null
       : CurrencyModel.fromJson(json['currency'] as Map<String, dynamic>),
@@ -40,12 +44,12 @@ _$HomeResponseModelImpl _$$HomeResponseModelImplFromJson(
 Map<String, dynamic> _$$HomeResponseModelImplToJson(
   _$HomeResponseModelImpl instance,
 ) => <String, dynamic>{
-  'success': instance.success,
+  'success': const IntConverter().toJson(instance.success),
   'message': instance.message,
   'banner1': instance.banners,
   'categories': instance.categories,
   'newarrivals': instance.newarrivals,
   'featuredbrands': instance.featuredbrands,
-  'cartcount': instance.cartcount,
+  'cartcount': const IntConverter().toJson(instance.cartcount),
   'currency': instance.currency,
 };

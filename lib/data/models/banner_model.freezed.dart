@@ -21,14 +21,22 @@ BannerModel _$BannerModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$BannerModel {
+  @IntConverter()
   int get id => throw _privateConstructorUsedError;
-  String? get title => throw _privateConstructorUsedError;
-  String? get subtitle => throw _privateConstructorUsedError;
+  @JsonKey(name: 'link_type')
+  @IntConverter()
+  int get linkType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'link_value')
+  String? get linkValue => throw _privateConstructorUsedError;
   @JsonKey(name: 'image')
   String? get imageUrl => throw _privateConstructorUsedError;
-  String? get action => throw _privateConstructorUsedError;
-  @JsonKey(name: 'action_url')
-  String? get actionUrl => throw _privateConstructorUsedError;
+  String? get video => throw _privateConstructorUsedError;
+  String? get title => throw _privateConstructorUsedError;
+  @JsonKey(name: 'sub_title')
+  String? get subTitle => throw _privateConstructorUsedError;
+  @JsonKey(name: 'button_text')
+  String? get buttonText => throw _privateConstructorUsedError;
+  String? get logo => throw _privateConstructorUsedError;
 
   /// Serializes this BannerModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,12 +56,15 @@ abstract class $BannerModelCopyWith<$Res> {
   ) = _$BannerModelCopyWithImpl<$Res, BannerModel>;
   @useResult
   $Res call({
-    int id,
-    String? title,
-    String? subtitle,
+    @IntConverter() int id,
+    @JsonKey(name: 'link_type') @IntConverter() int linkType,
+    @JsonKey(name: 'link_value') String? linkValue,
     @JsonKey(name: 'image') String? imageUrl,
-    String? action,
-    @JsonKey(name: 'action_url') String? actionUrl,
+    String? video,
+    String? title,
+    @JsonKey(name: 'sub_title') String? subTitle,
+    @JsonKey(name: 'button_text') String? buttonText,
+    String? logo,
   });
 }
 
@@ -73,11 +84,14 @@ class _$BannerModelCopyWithImpl<$Res, $Val extends BannerModel>
   @override
   $Res call({
     Object? id = null,
-    Object? title = freezed,
-    Object? subtitle = freezed,
+    Object? linkType = null,
+    Object? linkValue = freezed,
     Object? imageUrl = freezed,
-    Object? action = freezed,
-    Object? actionUrl = freezed,
+    Object? video = freezed,
+    Object? title = freezed,
+    Object? subTitle = freezed,
+    Object? buttonText = freezed,
+    Object? logo = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -85,25 +99,37 @@ class _$BannerModelCopyWithImpl<$Res, $Val extends BannerModel>
                 ? _value.id
                 : id // ignore: cast_nullable_to_non_nullable
                       as int,
-            title: freezed == title
-                ? _value.title
-                : title // ignore: cast_nullable_to_non_nullable
-                      as String?,
-            subtitle: freezed == subtitle
-                ? _value.subtitle
-                : subtitle // ignore: cast_nullable_to_non_nullable
+            linkType: null == linkType
+                ? _value.linkType
+                : linkType // ignore: cast_nullable_to_non_nullable
+                      as int,
+            linkValue: freezed == linkValue
+                ? _value.linkValue
+                : linkValue // ignore: cast_nullable_to_non_nullable
                       as String?,
             imageUrl: freezed == imageUrl
                 ? _value.imageUrl
                 : imageUrl // ignore: cast_nullable_to_non_nullable
                       as String?,
-            action: freezed == action
-                ? _value.action
-                : action // ignore: cast_nullable_to_non_nullable
+            video: freezed == video
+                ? _value.video
+                : video // ignore: cast_nullable_to_non_nullable
                       as String?,
-            actionUrl: freezed == actionUrl
-                ? _value.actionUrl
-                : actionUrl // ignore: cast_nullable_to_non_nullable
+            title: freezed == title
+                ? _value.title
+                : title // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            subTitle: freezed == subTitle
+                ? _value.subTitle
+                : subTitle // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            buttonText: freezed == buttonText
+                ? _value.buttonText
+                : buttonText // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            logo: freezed == logo
+                ? _value.logo
+                : logo // ignore: cast_nullable_to_non_nullable
                       as String?,
           )
           as $Val,
@@ -121,12 +147,15 @@ abstract class _$$BannerModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    int id,
-    String? title,
-    String? subtitle,
+    @IntConverter() int id,
+    @JsonKey(name: 'link_type') @IntConverter() int linkType,
+    @JsonKey(name: 'link_value') String? linkValue,
     @JsonKey(name: 'image') String? imageUrl,
-    String? action,
-    @JsonKey(name: 'action_url') String? actionUrl,
+    String? video,
+    String? title,
+    @JsonKey(name: 'sub_title') String? subTitle,
+    @JsonKey(name: 'button_text') String? buttonText,
+    String? logo,
   });
 }
 
@@ -145,11 +174,14 @@ class __$$BannerModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? title = freezed,
-    Object? subtitle = freezed,
+    Object? linkType = null,
+    Object? linkValue = freezed,
     Object? imageUrl = freezed,
-    Object? action = freezed,
-    Object? actionUrl = freezed,
+    Object? video = freezed,
+    Object? title = freezed,
+    Object? subTitle = freezed,
+    Object? buttonText = freezed,
+    Object? logo = freezed,
   }) {
     return _then(
       _$BannerModelImpl(
@@ -157,25 +189,37 @@ class __$$BannerModelImplCopyWithImpl<$Res>
             ? _value.id
             : id // ignore: cast_nullable_to_non_nullable
                   as int,
-        title: freezed == title
-            ? _value.title
-            : title // ignore: cast_nullable_to_non_nullable
-                  as String?,
-        subtitle: freezed == subtitle
-            ? _value.subtitle
-            : subtitle // ignore: cast_nullable_to_non_nullable
+        linkType: null == linkType
+            ? _value.linkType
+            : linkType // ignore: cast_nullable_to_non_nullable
+                  as int,
+        linkValue: freezed == linkValue
+            ? _value.linkValue
+            : linkValue // ignore: cast_nullable_to_non_nullable
                   as String?,
         imageUrl: freezed == imageUrl
             ? _value.imageUrl
             : imageUrl // ignore: cast_nullable_to_non_nullable
                   as String?,
-        action: freezed == action
-            ? _value.action
-            : action // ignore: cast_nullable_to_non_nullable
+        video: freezed == video
+            ? _value.video
+            : video // ignore: cast_nullable_to_non_nullable
                   as String?,
-        actionUrl: freezed == actionUrl
-            ? _value.actionUrl
-            : actionUrl // ignore: cast_nullable_to_non_nullable
+        title: freezed == title
+            ? _value.title
+            : title // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        subTitle: freezed == subTitle
+            ? _value.subTitle
+            : subTitle // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        buttonText: freezed == buttonText
+            ? _value.buttonText
+            : buttonText // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        logo: freezed == logo
+            ? _value.logo
+            : logo // ignore: cast_nullable_to_non_nullable
                   as String?,
       ),
     );
@@ -186,12 +230,15 @@ class __$$BannerModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$BannerModelImpl implements _BannerModel {
   const _$BannerModelImpl({
-    this.id = 0,
-    this.title,
-    this.subtitle,
+    @IntConverter() this.id = 0,
+    @JsonKey(name: 'link_type') @IntConverter() this.linkType = 0,
+    @JsonKey(name: 'link_value') this.linkValue,
     @JsonKey(name: 'image') this.imageUrl,
-    this.action,
-    @JsonKey(name: 'action_url') this.actionUrl,
+    this.video,
+    this.title,
+    @JsonKey(name: 'sub_title') this.subTitle,
+    @JsonKey(name: 'button_text') this.buttonText,
+    this.logo,
   });
 
   factory _$BannerModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -199,23 +246,34 @@ class _$BannerModelImpl implements _BannerModel {
 
   @override
   @JsonKey()
+  @IntConverter()
   final int id;
   @override
-  final String? title;
+  @JsonKey(name: 'link_type')
+  @IntConverter()
+  final int linkType;
   @override
-  final String? subtitle;
+  @JsonKey(name: 'link_value')
+  final String? linkValue;
   @override
   @JsonKey(name: 'image')
   final String? imageUrl;
   @override
-  final String? action;
+  final String? video;
   @override
-  @JsonKey(name: 'action_url')
-  final String? actionUrl;
+  final String? title;
+  @override
+  @JsonKey(name: 'sub_title')
+  final String? subTitle;
+  @override
+  @JsonKey(name: 'button_text')
+  final String? buttonText;
+  @override
+  final String? logo;
 
   @override
   String toString() {
-    return 'BannerModel(id: $id, title: $title, subtitle: $subtitle, imageUrl: $imageUrl, action: $action, actionUrl: $actionUrl)';
+    return 'BannerModel(id: $id, linkType: $linkType, linkValue: $linkValue, imageUrl: $imageUrl, video: $video, title: $title, subTitle: $subTitle, buttonText: $buttonText, logo: $logo)';
   }
 
   @override
@@ -224,14 +282,19 @@ class _$BannerModelImpl implements _BannerModel {
         (other.runtimeType == runtimeType &&
             other is _$BannerModelImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.title, title) || other.title == title) &&
-            (identical(other.subtitle, subtitle) ||
-                other.subtitle == subtitle) &&
+            (identical(other.linkType, linkType) ||
+                other.linkType == linkType) &&
+            (identical(other.linkValue, linkValue) ||
+                other.linkValue == linkValue) &&
             (identical(other.imageUrl, imageUrl) ||
                 other.imageUrl == imageUrl) &&
-            (identical(other.action, action) || other.action == action) &&
-            (identical(other.actionUrl, actionUrl) ||
-                other.actionUrl == actionUrl));
+            (identical(other.video, video) || other.video == video) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.subTitle, subTitle) ||
+                other.subTitle == subTitle) &&
+            (identical(other.buttonText, buttonText) ||
+                other.buttonText == buttonText) &&
+            (identical(other.logo, logo) || other.logo == logo));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -239,11 +302,14 @@ class _$BannerModelImpl implements _BannerModel {
   int get hashCode => Object.hash(
     runtimeType,
     id,
-    title,
-    subtitle,
+    linkType,
+    linkValue,
     imageUrl,
-    action,
-    actionUrl,
+    video,
+    title,
+    subTitle,
+    buttonText,
+    logo,
   );
 
   /// Create a copy of BannerModel
@@ -262,31 +328,45 @@ class _$BannerModelImpl implements _BannerModel {
 
 abstract class _BannerModel implements BannerModel {
   const factory _BannerModel({
-    final int id,
-    final String? title,
-    final String? subtitle,
+    @IntConverter() final int id,
+    @JsonKey(name: 'link_type') @IntConverter() final int linkType,
+    @JsonKey(name: 'link_value') final String? linkValue,
     @JsonKey(name: 'image') final String? imageUrl,
-    final String? action,
-    @JsonKey(name: 'action_url') final String? actionUrl,
+    final String? video,
+    final String? title,
+    @JsonKey(name: 'sub_title') final String? subTitle,
+    @JsonKey(name: 'button_text') final String? buttonText,
+    final String? logo,
   }) = _$BannerModelImpl;
 
   factory _BannerModel.fromJson(Map<String, dynamic> json) =
       _$BannerModelImpl.fromJson;
 
   @override
+  @IntConverter()
   int get id;
   @override
-  String? get title;
+  @JsonKey(name: 'link_type')
+  @IntConverter()
+  int get linkType;
   @override
-  String? get subtitle;
+  @JsonKey(name: 'link_value')
+  String? get linkValue;
   @override
   @JsonKey(name: 'image')
   String? get imageUrl;
   @override
-  String? get action;
+  String? get video;
   @override
-  @JsonKey(name: 'action_url')
-  String? get actionUrl;
+  String? get title;
+  @override
+  @JsonKey(name: 'sub_title')
+  String? get subTitle;
+  @override
+  @JsonKey(name: 'button_text')
+  String? get buttonText;
+  @override
+  String? get logo;
 
   /// Create a copy of BannerModel
   /// with the given fields replaced by the non-null parameter values.

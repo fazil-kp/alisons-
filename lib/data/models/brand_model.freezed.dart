@@ -21,12 +21,14 @@ BrandModel _$BrandModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$BrandModel {
+  @IntConverter()
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String? get slug => throw _privateConstructorUsedError;
   @JsonKey(name: 'image')
   String? get imageUrl => throw _privateConstructorUsedError;
   @JsonKey(name: 'item_count')
+  @IntConverter()
   int get itemCount => throw _privateConstructorUsedError;
 
   /// Serializes this BrandModel to a JSON map.
@@ -47,11 +49,11 @@ abstract class $BrandModelCopyWith<$Res> {
   ) = _$BrandModelCopyWithImpl<$Res, BrandModel>;
   @useResult
   $Res call({
-    int id,
+    @IntConverter() int id,
     String name,
     String? slug,
     @JsonKey(name: 'image') String? imageUrl,
-    @JsonKey(name: 'item_count') int itemCount,
+    @JsonKey(name: 'item_count') @IntConverter() int itemCount,
   });
 }
 
@@ -114,11 +116,11 @@ abstract class _$$BrandModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    int id,
+    @IntConverter() int id,
     String name,
     String? slug,
     @JsonKey(name: 'image') String? imageUrl,
-    @JsonKey(name: 'item_count') int itemCount,
+    @JsonKey(name: 'item_count') @IntConverter() int itemCount,
   });
 }
 
@@ -173,11 +175,11 @@ class __$$BrandModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$BrandModelImpl implements _BrandModel {
   const _$BrandModelImpl({
-    this.id = 0,
+    @IntConverter() this.id = 0,
     this.name = '',
     this.slug,
     @JsonKey(name: 'image') this.imageUrl,
-    @JsonKey(name: 'item_count') this.itemCount = 0,
+    @JsonKey(name: 'item_count') @IntConverter() this.itemCount = 0,
   });
 
   factory _$BrandModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -185,6 +187,7 @@ class _$BrandModelImpl implements _BrandModel {
 
   @override
   @JsonKey()
+  @IntConverter()
   final int id;
   @override
   @JsonKey()
@@ -196,6 +199,7 @@ class _$BrandModelImpl implements _BrandModel {
   final String? imageUrl;
   @override
   @JsonKey(name: 'item_count')
+  @IntConverter()
   final int itemCount;
 
   @override
@@ -238,17 +242,18 @@ class _$BrandModelImpl implements _BrandModel {
 
 abstract class _BrandModel implements BrandModel {
   const factory _BrandModel({
-    final int id,
+    @IntConverter() final int id,
     final String name,
     final String? slug,
     @JsonKey(name: 'image') final String? imageUrl,
-    @JsonKey(name: 'item_count') final int itemCount,
+    @JsonKey(name: 'item_count') @IntConverter() final int itemCount,
   }) = _$BrandModelImpl;
 
   factory _BrandModel.fromJson(Map<String, dynamic> json) =
       _$BrandModelImpl.fromJson;
 
   @override
+  @IntConverter()
   int get id;
   @override
   String get name;
@@ -259,6 +264,7 @@ abstract class _BrandModel implements BrandModel {
   String? get imageUrl;
   @override
   @JsonKey(name: 'item_count')
+  @IntConverter()
   int get itemCount;
 
   /// Create a copy of BrandModel

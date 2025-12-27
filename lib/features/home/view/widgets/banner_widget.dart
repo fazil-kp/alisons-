@@ -7,79 +7,86 @@ import '../../../../core/utils/extensions.dart';
 class BannerWidget extends StatelessWidget {
   final BannerModel banner;
 
-  const BannerWidget({
-    super.key,
-    required this.banner,
-  });
+  const BannerWidget({super.key, required this.banner});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      decoration: BoxDecoration(
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(16)),
+      child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
-        gradient: LinearGradient(
-          colors: [
-            AppTheme.orange,
-            AppTheme.orange.withOpacity(0.8),
-          ],
-        ),
-      ),
-      child: Stack(
-        children: [
-          if (banner.imageUrl != null)
-            ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: CachedNetworkImage(
+        child: Stack(
+          children: [
+            // Banner Image
+            if (banner.imageUrl != null)
+              CachedNetworkImage(
                 imageUrl: banner.imageUrl!.imageUrl,
                 width: double.infinity,
-                height: 180,
+                height: 200,
                 fit: BoxFit.cover,
+                placeholder: (context, url) => Container(
+                  width: double.infinity,
+                  height: 200,
+                  color: Colors.grey.shade200,
+                  child: const Center(child: CircularProgressIndicator()),
+                ),
                 errorWidget: (context, url, error) => Container(
+                  width: double.infinity,
+                  height: 200,
                   color: AppTheme.orange,
+                  child: const Icon(Icons.image_not_supported, color: AppTheme.white),
+                ),
+              ),
+            // Gradient overlay for better text visibility
+            Container(
+              width: double.infinity,
+              height: 200,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Colors.black.withOpacity(0.3), Colors.black.withOpacity(0.6)]),
+              ),
+            ),
+            // Content (Title, Subtitle, Button)
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (banner.title != null && banner.title!.isNotEmpty)
+                      Text(
+                        banner.title!,
+                        style: context.textTheme.titleLarge?.copyWith(color: AppTheme.white, fontWeight: FontWeight.bold, fontSize: 24),
+                      ),
+                    if (banner.subTitle != null && banner.subTitle!.isNotEmpty) ...[const SizedBox(height: 8), Text(banner.subTitle!, style: context.textTheme.bodyLarge?.copyWith(color: AppTheme.white, fontSize: 16))],
+                    if (banner.buttonText != null && banner.buttonText!.isNotEmpty) ...[
+                      const SizedBox(height: 16),
+                      ElevatedButton(
+                        onPressed: () {
+                          // TODO: Handle banner action based on linkType and linkValue
+                          if (banner.linkValue != null && banner.linkValue!.isNotEmpty) {
+                            // Handle navigation based on linkType
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppTheme.orange,
+                          foregroundColor: AppTheme.white,
+                          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                        ),
+                        child: Text(banner.buttonText!, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                      ),
+                    ],
+                  ],
                 ),
               ),
             ),
-          Container(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (banner.title != null)
-                  Text(
-                    banner.title!,
-                    style: context.textTheme.bodyMedium?.copyWith(
-                      color: AppTheme.white,
-                    ),
-                  ),
-                if (banner.subtitle != null) ...[
-                  const SizedBox(height: 8),
-                  Text(
-                    banner.subtitle!,
-                    style: context.textTheme.titleLarge?.copyWith(
-                      color: AppTheme.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () {
-                    // TODO: Handle banner action
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppTheme.white,
-                    foregroundColor: AppTheme.orange,
-                  ),
-                  child: const Text('Shop Now'),
-                ),
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 }
-

@@ -7,7 +7,7 @@ import '../../../features/cart/viewmodel/cart_viewmodel.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/utils/extensions.dart';
-import 'widgets/banner_widget.dart';
+import 'widgets/banner_carousel_widget.dart';
 import 'widgets/category_item_widget.dart';
 import 'widgets/product_section_widget.dart';
 
@@ -93,22 +93,11 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
-                    Icons.error_outline,
-                    size: 64,
-                    color: Colors.grey.shade400,
-                  ),
+                  Icon(Icons.error_outline, size: 64, color: Colors.grey.shade400),
                   const SizedBox(height: 16),
-                  Text(
-                    viewModel.errorMessage ?? 'Something went wrong',
-                    style: context.textTheme.titleMedium,
-                    textAlign: TextAlign.center,
-                  ),
+                  Text(viewModel.errorMessage ?? 'Something went wrong', style: context.textTheme.titleMedium, textAlign: TextAlign.center),
                   const SizedBox(height: 16),
-                  ElevatedButton(
-                    onPressed: () => viewModel.loadHomeData(),
-                    child: const Text('Retry'),
-                  ),
+                  ElevatedButton(onPressed: () => viewModel.loadHomeData(), child: const Text('Retry')),
                 ],
               ),
             );
@@ -126,68 +115,47 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Banner
+                  // Banner Carousel
                   if (homeData.banners.isNotEmpty)
-                    BannerWidget(banner: homeData.banners.first)
+                    BannerCarouselWidget(banners: homeData.banners)
                   else
                     Container(
                       margin: const EdgeInsets.all(16),
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
-                        gradient: LinearGradient(
-                          colors: [
-                            AppTheme.orange,
-                            AppTheme.orange.withOpacity(0.8),
-                          ],
-                        ),
+                        gradient: LinearGradient(colors: [AppTheme.orange, AppTheme.orange.withOpacity(0.8)]),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'Hurry Up! Get 10% Off',
-                            style: TextStyle(
-                              color: AppTheme.white,
-                              fontSize: 14,
-                            ),
-                          ),
+                          const Text('Hurry Up! Get 10% Off', style: TextStyle(color: AppTheme.white, fontSize: 14)),
                           const SizedBox(height: 8),
                           const Text(
                             'Go Natural with Unpolished Grains',
-                            style: TextStyle(
-                              color: AppTheme.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: TextStyle(color: AppTheme.white, fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(height: 16),
                           ElevatedButton(
                             onPressed: () {
                               // TODO: Handle banner action
                             },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppTheme.white,
-                              foregroundColor: AppTheme.orange,
-                            ),
+                            style: ElevatedButton.styleFrom(backgroundColor: AppTheme.white, foregroundColor: AppTheme.orange),
                             child: const Text('Shop Now'),
                           ),
                         ],
                       ),
                     ),
-                  
+
                   const SizedBox(height: 16),
-                  
+
                   // Categories
                   if (homeData.categories.isNotEmpty) ...[
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
                         'Categories',
-                        style: context.textTheme.titleLarge?.copyWith(
-                          color: AppTheme.primaryColor,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: context.textTheme.titleLarge?.copyWith(color: AppTheme.primaryColor, fontWeight: FontWeight.bold),
                       ),
                     ),
                     const SizedBox(height: 12),
@@ -200,23 +168,17 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemBuilder: (context, index) {
                           return Padding(
                             padding: const EdgeInsets.only(right: 16),
-                            child: CategoryItemWidget(
-                              category: homeData.categories[index],
-                            ),
+                            child: CategoryItemWidget(category: homeData.categories[index]),
                           );
                         },
                       ),
                     ),
                     const SizedBox(height: 24),
                   ],
-                  
+
                   // New Arrivals
-                  if (homeData.newarrivals.isNotEmpty)
-                    ProductSectionWidget(
-                      title: 'New Arrivals',
-                      products: homeData.newarrivals,
-                    ),
-                  
+                  if (homeData.newarrivals.isNotEmpty) ProductSectionWidget(title: 'New Arrivals', products: homeData.newarrivals),
+
                   const SizedBox(height: 24),
                 ],
               ),
@@ -254,14 +216,8 @@ class _HomeScreenState extends State<HomeScreen> {
         }
       },
       items: [
-        const BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
-        ),
-        const BottomNavigationBarItem(
-          icon: Icon(Icons.shopping_bag),
-          label: 'Products',
-        ),
+        const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+        const BottomNavigationBarItem(icon: Icon(Icons.shopping_bag), label: 'Products'),
         BottomNavigationBarItem(
           icon: Stack(
             children: [
@@ -272,21 +228,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   top: 0,
                   child: Container(
                     padding: const EdgeInsets.all(2),
-                    decoration: const BoxDecoration(
-                      color: Colors.red,
-                      shape: BoxShape.circle,
-                    ),
-                    constraints: const BoxConstraints(
-                      minWidth: 16,
-                      minHeight: 16,
-                    ),
+                    decoration: const BoxDecoration(color: Colors.red, shape: BoxShape.circle),
+                    constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
                     child: Text(
                       '$cartItemCount',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -295,12 +241,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           label: 'Cart',
         ),
-        const BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: 'Profile',
-        ),
+        const BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
       ],
     );
   }
 }
-

@@ -21,6 +21,7 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ProductModel {
+  @IntConverter()
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String? get slug => throw _privateConstructorUsedError;
@@ -28,10 +29,13 @@ mixin _$ProductModel {
   @JsonKey(name: 'image')
   String? get imageUrl => throw _privateConstructorUsedError;
   @JsonKey(name: 'price')
+  @DoubleConverter()
   double get currentPrice => throw _privateConstructorUsedError;
   @JsonKey(name: 'original_price')
+  @NullableDoubleConverter()
   double? get originalPrice => throw _privateConstructorUsedError;
   @JsonKey(name: 'discount_percentage')
+  @NullableDoubleConverter()
   double? get discountPercentage => throw _privateConstructorUsedError;
   String? get category => throw _privateConstructorUsedError;
   @JsonKey(name: 'category_slug')
@@ -39,6 +43,7 @@ mixin _$ProductModel {
   @JsonKey(name: 'in_stock')
   bool get inStock => throw _privateConstructorUsedError;
   @JsonKey(name: 'quantity')
+  @IntConverter()
   int get quantity => throw _privateConstructorUsedError;
 
   /// Serializes this ProductModel to a JSON map.
@@ -59,18 +64,22 @@ abstract class $ProductModelCopyWith<$Res> {
   ) = _$ProductModelCopyWithImpl<$Res, ProductModel>;
   @useResult
   $Res call({
-    int id,
+    @IntConverter() int id,
     String name,
     String? slug,
     String? description,
     @JsonKey(name: 'image') String? imageUrl,
-    @JsonKey(name: 'price') double currentPrice,
-    @JsonKey(name: 'original_price') double? originalPrice,
-    @JsonKey(name: 'discount_percentage') double? discountPercentage,
+    @JsonKey(name: 'price') @DoubleConverter() double currentPrice,
+    @JsonKey(name: 'original_price')
+    @NullableDoubleConverter()
+    double? originalPrice,
+    @JsonKey(name: 'discount_percentage')
+    @NullableDoubleConverter()
+    double? discountPercentage,
     String? category,
     @JsonKey(name: 'category_slug') String? categorySlug,
     @JsonKey(name: 'in_stock') bool inStock,
-    @JsonKey(name: 'quantity') int quantity,
+    @JsonKey(name: 'quantity') @IntConverter() int quantity,
   });
 }
 
@@ -168,18 +177,22 @@ abstract class _$$ProductModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    int id,
+    @IntConverter() int id,
     String name,
     String? slug,
     String? description,
     @JsonKey(name: 'image') String? imageUrl,
-    @JsonKey(name: 'price') double currentPrice,
-    @JsonKey(name: 'original_price') double? originalPrice,
-    @JsonKey(name: 'discount_percentage') double? discountPercentage,
+    @JsonKey(name: 'price') @DoubleConverter() double currentPrice,
+    @JsonKey(name: 'original_price')
+    @NullableDoubleConverter()
+    double? originalPrice,
+    @JsonKey(name: 'discount_percentage')
+    @NullableDoubleConverter()
+    double? discountPercentage,
     String? category,
     @JsonKey(name: 'category_slug') String? categorySlug,
     @JsonKey(name: 'in_stock') bool inStock,
-    @JsonKey(name: 'quantity') int quantity,
+    @JsonKey(name: 'quantity') @IntConverter() int quantity,
   });
 }
 
@@ -269,18 +282,22 @@ class __$$ProductModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ProductModelImpl implements _ProductModel {
   const _$ProductModelImpl({
-    this.id = 0,
+    @IntConverter() this.id = 0,
     this.name = '',
     this.slug,
     this.description,
     @JsonKey(name: 'image') this.imageUrl,
-    @JsonKey(name: 'price') this.currentPrice = 0.0,
-    @JsonKey(name: 'original_price') this.originalPrice,
-    @JsonKey(name: 'discount_percentage') this.discountPercentage,
+    @JsonKey(name: 'price') @DoubleConverter() this.currentPrice = 0.0,
+    @JsonKey(name: 'original_price')
+    @NullableDoubleConverter()
+    this.originalPrice,
+    @JsonKey(name: 'discount_percentage')
+    @NullableDoubleConverter()
+    this.discountPercentage,
     this.category,
     @JsonKey(name: 'category_slug') this.categorySlug,
     @JsonKey(name: 'in_stock') this.inStock = true,
-    @JsonKey(name: 'quantity') this.quantity = 0,
+    @JsonKey(name: 'quantity') @IntConverter() this.quantity = 0,
   });
 
   factory _$ProductModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -288,6 +305,7 @@ class _$ProductModelImpl implements _ProductModel {
 
   @override
   @JsonKey()
+  @IntConverter()
   final int id;
   @override
   @JsonKey()
@@ -301,12 +319,15 @@ class _$ProductModelImpl implements _ProductModel {
   final String? imageUrl;
   @override
   @JsonKey(name: 'price')
+  @DoubleConverter()
   final double currentPrice;
   @override
   @JsonKey(name: 'original_price')
+  @NullableDoubleConverter()
   final double? originalPrice;
   @override
   @JsonKey(name: 'discount_percentage')
+  @NullableDoubleConverter()
   final double? discountPercentage;
   @override
   final String? category;
@@ -318,6 +339,7 @@ class _$ProductModelImpl implements _ProductModel {
   final bool inStock;
   @override
   @JsonKey(name: 'quantity')
+  @IntConverter()
   final int quantity;
 
   @override
@@ -386,24 +408,29 @@ class _$ProductModelImpl implements _ProductModel {
 
 abstract class _ProductModel implements ProductModel {
   const factory _ProductModel({
-    final int id,
+    @IntConverter() final int id,
     final String name,
     final String? slug,
     final String? description,
     @JsonKey(name: 'image') final String? imageUrl,
-    @JsonKey(name: 'price') final double currentPrice,
-    @JsonKey(name: 'original_price') final double? originalPrice,
-    @JsonKey(name: 'discount_percentage') final double? discountPercentage,
+    @JsonKey(name: 'price') @DoubleConverter() final double currentPrice,
+    @JsonKey(name: 'original_price')
+    @NullableDoubleConverter()
+    final double? originalPrice,
+    @JsonKey(name: 'discount_percentage')
+    @NullableDoubleConverter()
+    final double? discountPercentage,
     final String? category,
     @JsonKey(name: 'category_slug') final String? categorySlug,
     @JsonKey(name: 'in_stock') final bool inStock,
-    @JsonKey(name: 'quantity') final int quantity,
+    @JsonKey(name: 'quantity') @IntConverter() final int quantity,
   }) = _$ProductModelImpl;
 
   factory _ProductModel.fromJson(Map<String, dynamic> json) =
       _$ProductModelImpl.fromJson;
 
   @override
+  @IntConverter()
   int get id;
   @override
   String get name;
@@ -416,12 +443,15 @@ abstract class _ProductModel implements ProductModel {
   String? get imageUrl;
   @override
   @JsonKey(name: 'price')
+  @DoubleConverter()
   double get currentPrice;
   @override
   @JsonKey(name: 'original_price')
+  @NullableDoubleConverter()
   double? get originalPrice;
   @override
   @JsonKey(name: 'discount_percentage')
+  @NullableDoubleConverter()
   double? get discountPercentage;
   @override
   String? get category;
@@ -433,6 +463,7 @@ abstract class _ProductModel implements ProductModel {
   bool get inStock;
   @override
   @JsonKey(name: 'quantity')
+  @IntConverter()
   int get quantity;
 
   /// Create a copy of ProductModel

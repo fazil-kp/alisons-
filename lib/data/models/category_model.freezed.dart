@@ -21,12 +21,14 @@ CategoryModel _$CategoryModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CategoryModel {
+  @IntConverter()
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String? get slug => throw _privateConstructorUsedError;
   @JsonKey(name: 'image')
   String? get imageUrl => throw _privateConstructorUsedError;
   @JsonKey(name: 'item_count')
+  @IntConverter()
   int get itemCount => throw _privateConstructorUsedError;
 
   /// Serializes this CategoryModel to a JSON map.
@@ -47,11 +49,11 @@ abstract class $CategoryModelCopyWith<$Res> {
   ) = _$CategoryModelCopyWithImpl<$Res, CategoryModel>;
   @useResult
   $Res call({
-    int id,
+    @IntConverter() int id,
     String name,
     String? slug,
     @JsonKey(name: 'image') String? imageUrl,
-    @JsonKey(name: 'item_count') int itemCount,
+    @JsonKey(name: 'item_count') @IntConverter() int itemCount,
   });
 }
 
@@ -114,11 +116,11 @@ abstract class _$$CategoryModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    int id,
+    @IntConverter() int id,
     String name,
     String? slug,
     @JsonKey(name: 'image') String? imageUrl,
-    @JsonKey(name: 'item_count') int itemCount,
+    @JsonKey(name: 'item_count') @IntConverter() int itemCount,
   });
 }
 
@@ -173,11 +175,11 @@ class __$$CategoryModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CategoryModelImpl implements _CategoryModel {
   const _$CategoryModelImpl({
-    this.id = 0,
+    @IntConverter() this.id = 0,
     this.name = '',
     this.slug,
     @JsonKey(name: 'image') this.imageUrl,
-    @JsonKey(name: 'item_count') this.itemCount = 0,
+    @JsonKey(name: 'item_count') @IntConverter() this.itemCount = 0,
   });
 
   factory _$CategoryModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -185,6 +187,7 @@ class _$CategoryModelImpl implements _CategoryModel {
 
   @override
   @JsonKey()
+  @IntConverter()
   final int id;
   @override
   @JsonKey()
@@ -196,6 +199,7 @@ class _$CategoryModelImpl implements _CategoryModel {
   final String? imageUrl;
   @override
   @JsonKey(name: 'item_count')
+  @IntConverter()
   final int itemCount;
 
   @override
@@ -238,17 +242,18 @@ class _$CategoryModelImpl implements _CategoryModel {
 
 abstract class _CategoryModel implements CategoryModel {
   const factory _CategoryModel({
-    final int id,
+    @IntConverter() final int id,
     final String name,
     final String? slug,
     @JsonKey(name: 'image') final String? imageUrl,
-    @JsonKey(name: 'item_count') final int itemCount,
+    @JsonKey(name: 'item_count') @IntConverter() final int itemCount,
   }) = _$CategoryModelImpl;
 
   factory _CategoryModel.fromJson(Map<String, dynamic> json) =
       _$CategoryModelImpl.fromJson;
 
   @override
+  @IntConverter()
   int get id;
   @override
   String get name;
@@ -259,6 +264,7 @@ abstract class _CategoryModel implements CategoryModel {
   String? get imageUrl;
   @override
   @JsonKey(name: 'item_count')
+  @IntConverter()
   int get itemCount;
 
   /// Create a copy of CategoryModel

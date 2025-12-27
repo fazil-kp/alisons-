@@ -8,18 +8,20 @@ part of 'brand_model.dart';
 
 _$BrandModelImpl _$$BrandModelImplFromJson(Map<String, dynamic> json) =>
     _$BrandModelImpl(
-      id: (json['id'] as num?)?.toInt() ?? 0,
+      id: json['id'] == null ? 0 : const IntConverter().fromJson(json['id']),
       name: json['name'] as String? ?? '',
       slug: json['slug'] as String?,
       imageUrl: json['image'] as String?,
-      itemCount: (json['item_count'] as num?)?.toInt() ?? 0,
+      itemCount: json['item_count'] == null
+          ? 0
+          : const IntConverter().fromJson(json['item_count']),
     );
 
 Map<String, dynamic> _$$BrandModelImplToJson(_$BrandModelImpl instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      'id': const IntConverter().toJson(instance.id),
       'name': instance.name,
       'slug': instance.slug,
       'image': instance.imageUrl,
-      'item_count': instance.itemCount,
+      'item_count': const IntConverter().toJson(instance.itemCount),
     };

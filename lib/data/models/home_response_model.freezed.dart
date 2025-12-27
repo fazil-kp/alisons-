@@ -21,6 +21,7 @@ HomeResponseModel _$HomeResponseModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$HomeResponseModel {
+  @IntConverter()
   int get success => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
   @JsonKey(name: 'banner1')
@@ -28,6 +29,7 @@ mixin _$HomeResponseModel {
   List<CategoryModel> get categories => throw _privateConstructorUsedError;
   List<ProductModel> get newarrivals => throw _privateConstructorUsedError;
   List<BrandModel> get featuredbrands => throw _privateConstructorUsedError;
+  @IntConverter()
   int get cartcount => throw _privateConstructorUsedError;
   CurrencyModel? get currency => throw _privateConstructorUsedError;
 
@@ -49,13 +51,13 @@ abstract class $HomeResponseModelCopyWith<$Res> {
   ) = _$HomeResponseModelCopyWithImpl<$Res, HomeResponseModel>;
   @useResult
   $Res call({
-    int success,
+    @IntConverter() int success,
     String? message,
     @JsonKey(name: 'banner1') List<BannerModel> banners,
     List<CategoryModel> categories,
     List<ProductModel> newarrivals,
     List<BrandModel> featuredbrands,
-    int cartcount,
+    @IntConverter() int cartcount,
     CurrencyModel? currency,
   });
 
@@ -150,13 +152,13 @@ abstract class _$$HomeResponseModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    int success,
+    @IntConverter() int success,
     String? message,
     @JsonKey(name: 'banner1') List<BannerModel> banners,
     List<CategoryModel> categories,
     List<ProductModel> newarrivals,
     List<BrandModel> featuredbrands,
-    int cartcount,
+    @IntConverter() int cartcount,
     CurrencyModel? currency,
   });
 
@@ -230,13 +232,13 @@ class __$$HomeResponseModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$HomeResponseModelImpl implements _HomeResponseModel {
   const _$HomeResponseModelImpl({
-    this.success = 0,
+    @IntConverter() this.success = 0,
     this.message,
     @JsonKey(name: 'banner1') final List<BannerModel> banners = const [],
     final List<CategoryModel> categories = const [],
     final List<ProductModel> newarrivals = const [],
     final List<BrandModel> featuredbrands = const [],
-    this.cartcount = 0,
+    @IntConverter() this.cartcount = 0,
     this.currency,
   }) : _banners = banners,
        _categories = categories,
@@ -248,6 +250,7 @@ class _$HomeResponseModelImpl implements _HomeResponseModel {
 
   @override
   @JsonKey()
+  @IntConverter()
   final int success;
   @override
   final String? message;
@@ -289,6 +292,7 @@ class _$HomeResponseModelImpl implements _HomeResponseModel {
 
   @override
   @JsonKey()
+  @IntConverter()
   final int cartcount;
   @override
   final CurrencyModel? currency;
@@ -357,13 +361,13 @@ class _$HomeResponseModelImpl implements _HomeResponseModel {
 
 abstract class _HomeResponseModel implements HomeResponseModel {
   const factory _HomeResponseModel({
-    final int success,
+    @IntConverter() final int success,
     final String? message,
     @JsonKey(name: 'banner1') final List<BannerModel> banners,
     final List<CategoryModel> categories,
     final List<ProductModel> newarrivals,
     final List<BrandModel> featuredbrands,
-    final int cartcount,
+    @IntConverter() final int cartcount,
     final CurrencyModel? currency,
   }) = _$HomeResponseModelImpl;
 
@@ -371,6 +375,7 @@ abstract class _HomeResponseModel implements HomeResponseModel {
       _$HomeResponseModelImpl.fromJson;
 
   @override
+  @IntConverter()
   int get success;
   @override
   String? get message;
@@ -384,6 +389,7 @@ abstract class _HomeResponseModel implements HomeResponseModel {
   @override
   List<BrandModel> get featuredbrands;
   @override
+  @IntConverter()
   int get cartcount;
   @override
   CurrencyModel? get currency;
