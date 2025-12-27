@@ -46,13 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: AppTheme.primaryColor,
-        title: Row(
-          children: [
-            const Icon(Icons.shopping_cart, color: AppTheme.green),
-            const SizedBox(width: 8),
-            const Text(AppConstants.appName),
-          ],
-        ),
+        title: Row(children: [const Icon(Icons.shopping_cart, color: AppTheme.green)]),
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
